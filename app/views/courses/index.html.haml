@@ -1,0 +1,28 @@
+.w-full
+  - if notice.present?
+    %p#notice.py-2.px-3.bg-green-50.mb-5.text-green-500.font-medium.rounded-lg.inline-block= notice
+  .flex.justify-between.items-center
+    %h1.font-bold.text-4xl Courses
+    = link_to 'New course', new_course_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium"
+  #courses.min-w-full
+  .overflow-x-auto.relative.shadow-md.sm:rounded-lg
+    %table.w-full.text-sm.text-left.text-gray-500.dark:text-gray-400
+      %thead.text-xs.text-gray-700.uppercase.bg-gray-50.dark:bg-gray-700.dark:text-gray-400
+        %tr
+          %th.py-3.px-6.text-left.align-left{:scope => "col"}
+            Title
+          %th.py-3.px-6{:scope => "col"}
+            Description
+          %th.py-3.px-6{:scope => "col"}
+            Action
+      %tbody
+        - @courses.each do |course|
+          %tr.bg-white.border-b.dark:bg-gray-900.dark:border-gray-700
+            %td= course.title
+            %td= course.description
+            - if action_name != "show"
+              %td
+                = link_to "Show this course", course, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"
+                = link_to 'Edit this course', edit_course_path(course), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium"
+
+            
