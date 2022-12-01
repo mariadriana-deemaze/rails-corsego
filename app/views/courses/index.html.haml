@@ -14,12 +14,15 @@
           %th.py-3.px-6{:scope => "col"}
             Description
           %th.py-3.px-6{:scope => "col"}
+            User
+          %th.py-3.px-6{:scope => "col"}
             Action
       %tbody
         - @courses.each do |course|
           %tr.bg-white.border-b.dark:bg-gray-900.dark:border-gray-700
             %td= course.title
             %td= course.description
+            %td= course.user
             - if action_name != "show"
               %td
                 = link_to "Show this course", course, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"
