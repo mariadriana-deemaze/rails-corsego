@@ -28,10 +28,17 @@
         .hidden.sm:ml-6.sm:block
           .flex.space-x-4
             / Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white"
-            %a.bg-gray-900.text-white.px-3.py-2.rounded-md.text-sm.font-medium{"aria-current" => "page", :href => root_path} Dashboard
-            %a.text-gray-300.hover:bg-gray-700.hover:text-white.px-3.py-2.rounded-md.text-sm.font-medium{:href => courses_path} Courses
+            %a{:class => "px-3 py-2 rounded-md text-sm font-medium #{current_page?(root_path) ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}", "aria-current" => "page", :href => root_path} Dashboard
+            %a{:class => "px-3 py-2 rounded-md text-sm font-medium #{current_page?(courses_path) ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}", :href => courses_path} Courses
       
       - if current_user
+        = form_tag(courses_path, method: :get) do
+          %form{:class => "max-h-[30px]"}
+            %label.mb-2.text-sm.font-medium.text-gray-900.sr-only.dark:text-white{for: "default-search"} Search
+            .relative.flex.flex-col.justify-center
+              = text_field_tag :title, params[:title], autocomplete:'off', placeholder: "Search Courses", class: 'block w-full p-2 pl-5 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+              / %input#default-search.block.w-full.p-2.pl-5.text-sm.text-gray-900.border.border-gray-300.rounded-lg.bg-gray-50.focus:ring-blue-500.focus:border-blue-500.dark:bg-gray-700.dark:border-gray-600.dark:placeholder-gray-400.dark:text-white.dark:focus:ring-blue-500.dark:focus:border-blue-500{placeholder: "Search Courses", required: "", type: "search"}/
+              %button.text-white.absolute.bg-blue-700.hover:bg-blue-800.focus:ring-4.focus:outline-none.focus:ring-blue-300.font-medium.rounded-lg.text-sm.px-2.py-1.dark:bg-blue-600.dark:hover:bg-blue-700.dark:focus:ring-blue-800{class: "right-2.5", type: "submit"} Search
         .absolute.inset-y-0.right-0.flex.items-center.pr-2.sm:static.sm:inset-auto.sm:ml-6.sm:pr-0
           %button.rounded-full.bg-gray-800.p-1.text-gray-400.hover:text-white.focus:outline-none.focus:ring-2.focus:ring-white.focus:ring-offset-2.focus:ring-offset-gray-800{:type => "button"}
             %span.sr-only View notifications
@@ -58,8 +65,7 @@
               / Active: "bg-gray-100", Not Active: ""
               %a#user-menu-item-0.block.px-4.py-2.text-sm.text-gray-700{:href => "#", :role => "menuitem", :tabindex => "-1"} Your Profile
               %a#user-menu-item-1.block.px-4.py-2.text-sm.text-gray-700{:href => edit_user_registration_path, :role => "menuitem", :tabindex => "-1"} Settings
-              = link_to 'Sign out', destroy_user_session_path, data: {turbo_method: :delete}, class: 'block px-4 py-2 text-sm text-gray-700'
-              
+              = link_to 'Sign out', destroy_user_session_path, data: {turbo_method: :delete}, class: 'block px-4 py-2 text-sm text-gray-700'         
       - else
         %button.rounded-full.bg-gray-800.p-1.text-gray-400.hover:text-white.focus:outline-none.focus:ring-2.focus:ring-white.focus:ring-offset-2.focus:ring-offset-gray-800{:type => "button"}
           %a{:href => new_user_session_path} Sign in
