@@ -30,7 +30,8 @@
             / Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white"
             %a{:class => "px-3 py-2 rounded-md text-sm font-medium #{current_page?(root_path) ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}", "aria-current" => "page", :href => root_path} Dashboard
             %a{:class => "px-3 py-2 rounded-md text-sm font-medium #{current_page?(courses_path) ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}", :href => courses_path} Courses
-      
+            %a{:class => "px-3 py-2 rounded-md text-sm font-medium #{current_page?(new_course_path) ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}", :href => new_course_path} New Course
+
       - if current_user
         = form_tag(courses_path, method: :get) do
           %form{:class => "max-h-[30px]"}

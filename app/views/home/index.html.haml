@@ -1,1 +1,9 @@
-Homepage here
+%h2 Latest Courses
+.overflow-x-auto.relative.shadow-md.sm:rounded-lg.grid.grid-cols-3.gap-4
+    - @latest_courses.each do |latest_course|
+        = render 'courses/course', course: latest_course
+
+%h2 Courses
+.overflow-x-auto.relative.shadow-md.sm:rounded-lg.grid.grid-cols-3.gap-4
+    - @courses.each do |course|
+        = render 'courses/course', course: course
