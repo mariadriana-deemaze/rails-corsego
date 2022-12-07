@@ -1,0 +1,6 @@
+.flex.w-full.justify-between.items-center
+  %h1.font-bold.text-4xl.mb-10 Users
+#courses.min-w-full
+  .overflow-x-auto.relative.shadow-md.sm:rounded-lg.grid.grid-cols-3.gap-4
+    - @users.each do |user|
+      = render 'users/user', user: user
