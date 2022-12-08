@@ -1,5 +1,5 @@
 .flex.w-full.justify-between.items-center
-  %h1.font-bold.text-4xl.mb-10 Courses
+  %h1.font-bold.text-4xl.mb-10 #{@courses.length} courses
 #courses.min-w-full
   .overflow-x-auto.relative.shadow-md.sm:rounded-lg.grid.grid-cols-3.gap-4
     - @courses.each do |course|
