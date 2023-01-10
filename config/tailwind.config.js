@@ -1,11 +1,12 @@
-const defaultTheme = require('tailwindcss/defaultTheme')
+const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
   content: [
+    './public/*.html',
     './app/helpers/**/*.rb',
     './app/javascript/**/*.js',
-    './app/views/**/*',
-    './node_modules/flowbite/**/*.js'
+    './app/views/**/*.{erb,haml,html,slim}',
+    './node_modules/flowbite/**/*.js',
   ],
   theme: {
     extend: {
@@ -16,8 +17,9 @@ module.exports = {
   },
   plugins: [
     require('flowbite/plugin'),
+    require('prettier-plugin-tailwindcss'),
     require('@tailwindcss/forms'),
     require('@tailwindcss/aspect-ratio'),
     require('@tailwindcss/typography'),
-  ]
-}
+  ],
+};

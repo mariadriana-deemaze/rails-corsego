@@ -1,14 +1,52 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import 'actiontext.css';
 
-/*
-
-@layer components {
-  .btn-primary {
-    @apply py-2 px-4 bg-blue-200;
-  }
+.debug_dump {
+  @apply fixed bottom-4 left-2 right-2 box-border rounded-md border border-b-neutral-200 bg-slate-100 p-3;
 }
 
-*/
-@import 'actiontext.css';
+/* UI */
+
+.primary-button {
+  @apply mr-3 rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 md:mr-0;
+}
+
+.secondary-button {
+  @apply rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700;
+}
+
+/* TEXT */
+h1,
+h2,
+h3,
+h4,
+h5,
+p {
+  @apply text-gray-800;
+}
+
+h1 {
+  @apply text-5xl font-black;
+}
+
+h2 {
+  @apply text-4xl font-extrabold;
+}
+
+h3 {
+  @apply text-3xl font-bold;
+}
+
+h4 {
+  @apply text-2xl font-semibold;
+}
+
+h5 {
+  @apply text-xl font-medium;
+}
+
+p {
+  @apply text-base font-normal;
+}

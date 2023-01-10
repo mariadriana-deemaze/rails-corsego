@@ -1,5 +1,18 @@
 {
+  "name": "rails-corsego",
+  "description": "This a code-along tutorial project of a Udemy alike platform.",
+  "version": "0.0.1",
+  "private": true,
+  "license": "UNLICENSED",
+  "scripts": {
+    "css:recompile": "rails assets:clobber && rails assets:precompile",
+    "format": "npx prettier --write ."
+  },
   "dependencies": {
     "flowbite": "^1.6.0"
+  },
+  "devDependencies": {
+    "prettier": "^2.8.2",
+    "prettier-plugin-tailwindcss": "^0.2.1"
   }
 }
