@@ -58,6 +58,9 @@ gem 'friendly_id', '~> 5.4.0'
 
 gem "tailwindcss-rails", "~> 2.0"
 
+# filtering 
+gem "ransack"
+
 # hot reload
 gem "rails_live_reload"
 
