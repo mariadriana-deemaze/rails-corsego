@@ -7,7 +7,7 @@
       - if current_user
         %button#user-menu-button.flex.mr-3.text-sm.bg-gray-800.rounded-full.md:mr-0.focus:ring-4.focus:ring-gray-300.dark:focus:ring-gray-600{"aria-expanded" => "false", "data-dropdown-placement" => "bottom", "data-dropdown-toggle" => "user-dropdown", :type => "button"}
           %span.sr-only Open user menu
-          %img.w-8.h-8.rounded-full{:alt => "user photo", :src => "/docs/images/people/profile-picture-3.jpg"}/
+          = gravatar_for(current_user.email, size: 120, classes:"w-8 h-8 rounded-full")
         / Dropdown menu
         #user-dropdown.z-50.hidden.my-4.text-base.list-none.bg-white.divide-y.divide-gray-100.rounded.shadow.dark:bg-gray-700.dark:divide-gray-600
           .px-4.py-3
@@ -24,10 +24,11 @@
           %svg.w-6.h-6{"aria-hidden" => "true", :fill => "currentColor", :viewbox => "0 0 20 20", :xmlns => "http://www.w3.org/2000/svg"}
             %path{"clip-rule" => "evenodd", :d => "M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z", "fill-rule" => "evenodd"}
       - else
-        %button.secondary-button{:type => "button"}
-          %a{:href => new_user_session_path} Sign in
-        %button.primary-button{:type => "button"}
-          %a{:href => new_user_registration_path} Sign up
+        %div.flex.flex-row.gap-4
+          %button.secondary-button{:type => "button"}
+            %a{:href => new_user_session_path} Sign in
+          %button.primary-button{:type => "button"}
+            %a{:href => new_user_registration_path} Sign up
     
     #mobile-menu-2.items-center.justify-between.hidden.w-full.md:flex.md:w-auto.md:order-1
       %ul.flex.flex-col.p-4.mt-4.border.border-gray-100.rounded-lg.bg-gray-50.md:flex-row.md:space-x-8.md:mt-0.md:text-sm.md:font-medium.md:border-0.md:bg-white.dark:bg-gray-800.md:dark:bg-gray-900.dark:border-gray-700
