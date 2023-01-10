@@ -18,8 +18,6 @@ module.exports = {
   plugins: [
     require('flowbite/plugin'),
     require('prettier-plugin-tailwindcss'),
-    require('@tailwindcss/forms'),
-    require('@tailwindcss/aspect-ratio'),
-    require('@tailwindcss/typography'),
+    require('@tailwindcss/line-clamp'),
   ],
 };

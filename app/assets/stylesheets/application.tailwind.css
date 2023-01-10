@@ -48,5 +48,5 @@ h5 {
 }
 
 p {
-  @apply text-base font-normal;
+  @apply text-sm font-normal text-gray-700;
 }
