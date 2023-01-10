@@ -13,6 +13,6 @@
     %main.w-full.flex.flex-col
       = render 'layouts/navbar'
       = render 'layouts/messages'
-      %div.w-full.p-5
+      %div.w-full.p-5.mt-20
         = yield
         = debug(params) if Rails.env.development?

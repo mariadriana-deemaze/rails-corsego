@@ -1,10 +1,29 @@
-%nav.bg-white.border-b.border-gray-200.px-2.sm:px-4.rounded.dark:bg-gray-900{:class => "py-2.5"}
+%nav.bg-white.border-b.border-gray-200.px-2.sm:px-4.rounded.dark:bg-gray-900.fixed.top-0.w-full{:class => "py-2.5 z-[999]"}
   .container.flex.flex-wrap.items-center.justify-between.mx-auto
     %a.flex.items-center{:href => root_url }
       %img.h-6.mr-3.sm:h-9{:alt => "Flowbite Logo", :src => "https://flowbite.com/docs/images/logo.svg"}/
       %span.self-center.text-xl.font-semibold.whitespace-nowrap.dark:text-white Flowbite
-    .flex.items-center.md:order-2
+    .flex.items-center.md:order-2.gap-4
       - if current_user
+        / TODO: Figure out why this is parsing the action url correctly as normal form 🫠
+        / = simple_form_for(courses_path, html: { novalidate: true,
+        /                                        action:"/courses",
+        /                                        novalidate: false, 
+        /                                        method: 'GET' }) do |f|
+        /  .flex.flex-row
+        /    = f.input :title, name: "title", label: false, placeholder: "Search Courses", class: 'block w-full p-2 pl-5 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+        /    = f.button :submit, "Search", class: "text-white absolute bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-1 dark:bg-blue-600 dark:hover:bg-blue-700 dark focus:ring-blue-800"
+
+        = form_tag(courses_path, method: :get) do
+          %form{:class => "max-h-[30px]"}
+            %label.mb-2.text-sm.font-medium.text-gray-900.sr-only.dark:text-white{for: "default-search"} Search
+            .relative.flex.flex-col.justify-center
+              = text_field_tag :title, params[:title], autocomplete:'off', placeholder: "Search Courses", class: 'block w-full p-2 pl-5 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+              / %input#default-search.block.w-full.p-2.pl-5.text-sm.text-gray-900.border.border-gray-300.rounded-lg.bg-gray-50.focus:ring-blue-500.focus:border-blue-500.dark:bg-gray-700.dark:border-gray-600.dark:placeholder-gray-400.dark:text-white.dark:focus:ring-blue-500.dark:focus:border-blue-500{placeholder: "Search Courses", required: "", type: "search"}/
+              %button.h-7.w-7.text-white.absolute.bg-blue-700.hover:bg-blue-800.focus:ring-4.focus:outline-none.focus:ring-blue-300.font-medium.rounded-lg.text-sm.px-2.py-1.dark:bg-blue-600.dark:hover:bg-blue-700.dark:focus:ring-blue-800{class: "right-2.5", type: "submit"}
+                %svg.w-5.h-5{"aria-hidden" => "true", :fill => "none", :stroke => "currentColor", :viewbox => "0 0 24 24", :xmlns => "http://www.w3.org/2000/svg"}
+                  %path{:d => "M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2"}
+
         %button#user-menu-button.flex.mr-3.text-sm.bg-gray-800.rounded-full.md:mr-0.focus:ring-4.focus:ring-gray-300.dark:focus:ring-gray-600{"aria-expanded" => "false", "data-dropdown-placement" => "bottom", "data-dropdown-toggle" => "user-dropdown", :type => "button"}
           %span.sr-only Open user menu
           = gravatar_for(current_user.email, size: 120, classes:"w-8 h-8 rounded-full")
