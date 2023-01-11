@@ -1,2 +1,3 @@
 public/assets
 public/dev-assets
+config/tailwind.config.js
