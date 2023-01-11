@@ -1,10 +1,10 @@
-class CoursePolicy < ApplicationPolicy
+class UserPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       scope.all
     end
   end
-  
+
   def new? 
     self.has_access?
   end
@@ -28,6 +28,7 @@ class CoursePolicy < ApplicationPolicy
   private
 
   def has_access?
-    @user.has_any_role? :admin, :teacher || @record.user = @user
+    @user.has_any_role? :admin || @record.user = @user
   end
+
 end
