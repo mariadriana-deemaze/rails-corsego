@@ -28,6 +28,6 @@ class CoursePolicy < ApplicationPolicy
   private
 
   def has_access?
-    @user.has_any_role? :admin, :teacher || @record.user = @user
+    @record.user == @user || @user.has_any_role?(:admin, :teacher)
   end
 end

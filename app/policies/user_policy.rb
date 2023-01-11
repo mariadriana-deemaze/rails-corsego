@@ -28,7 +28,7 @@ class UserPolicy < ApplicationPolicy
   private
 
   def has_access?
-    @user.has_any_role? :admin || @record.user = @user
+    @record == @user || @user.has_role?(:admin)
   end
 
 end
