@@ -2,14 +2,6 @@ Rails.application.routes.draw do
   devise_for :users
   root 'home#index'
   get 'home/activities'
-  
-  get 'static_pages/privacy_policy'
-  get 'privacy_policy', to: 'static_pages#privacy_policy'
-
-
-
-
-
   resources :courses
-  resources :users
+  resources :users, only: [:index, :edit, :show, :update]
 end

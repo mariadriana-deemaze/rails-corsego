@@ -42,6 +42,9 @@
         %th.px-6.py-3{:scope => "col"}
           .flex.items-center
             = sort_link @q, :confirmed_at
+        %th.px-6.py-3{:scope => "col"}
+          .flex.items-center
+            Edit
     %tbody
 
       - if @users.count > 0
@@ -74,7 +77,11 @@
               - if user.confirmed_at.present?
                 %span.badge-min.badge-green Yes
               - else
-                %span.badge-min.badge-red No
+                %span.badge-min.badge-red No 
+            %th.px-6.py-4.font-medium.text-gray-900.whitespace-nowrap.dark:text-white{:scope => "row"}
+              = link_to edit_user_path(user) do
+                %svg.w-6.h-6{"aria-hidden" => "true", :fill => "none", :stroke => "currentColor", "stroke-width" => "1.5", :viewbox => "0 0 24 24", :xmlns => "http://www.w3.org/2000/svg"}
+                  %path{:d => "M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10", "stroke-linecap" => "round", "stroke-linejoin" => "round"}
       - else
         %tr.bg-white.border-b.dark:bg-gray-800.dark:border-gray-700
           %th.col-span-7.px-6.py-4.font-medium.text-gray-900.whitespace-nowrap.dark:text-white{:scope => "row"}

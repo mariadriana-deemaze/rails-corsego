@@ -1,10 +1,12 @@
-User.create!(email: 'maria_adriana@gmail.com', password: 'wazzzup', password_confirmation:'wazzzup')
+psw = '12345678'
 
-5.times do 
+User.create!(email: 'mariaadriana15@gmail.com', password: psw, password_confirmation: psw)
+
+5.times do |index|
   User.create!([{
-    email: Faker::Internet.safe_email,
-    password: '123456',
-    password_confirmation: '123456'
+    email: Faker::Internet.safe_email(name: "random_email#{index}"),
+    password: psw,
+    password_confirmation: psw
   }])
 end
 

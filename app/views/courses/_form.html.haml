@@ -1,7 +1,7 @@
 = simple_form_for @course do |f|
   = f.error_notification
   = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
-  .form-inputs.flex.flex-col.gap-3
+  .flex.flex-col.gap-3
     = f.input :title
     = f.label :description
     = f.rich_text_area :description
@@ -10,5 +10,4 @@
     = f.input :language, collection: ["English", "Portuguese"]
     = f.input :level, collection: ["Beginner", "Intermedite", "Advanced"]
     = f.input :price
-  .form-actions
     = f.button :submit

@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  validate :must_have_a_role, on: :update
+
   after_create :assign_default_role
   
   devise :database_authenticatable, :registerable,
@@ -15,6 +17,14 @@ class User < ApplicationRecord
   
   def assign_default_role
     self.add_role(:student) if self.roles.blank?
+  end
+
+  private 
+
+  def must_have_a_role 
+    unless roles.any?
+      errors.add(:roles, "must have atleast one role")
+    end
   end
    
 end
