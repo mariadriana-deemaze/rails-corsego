@@ -1,11 +1,9 @@
 .w-full.max-h-96.max-w-sm.border.border-gray-200.bg-white.rounded-lg.shadow-md.dark:bg-gray-800.dark:border-gray-700
   .flex.flex-col.p-5.justify-between.h-full
     .flex.flex-col.gap-3
-
-      %span.bg-green-100.text-green-800.text-sm.font-medium.mr-2.px-2.5.py-0.5.rounded.dark:bg-green-900.dark:text-green-300.self-start
+      %span.badge-min.badge-green.self-start
         = course.level
-
-      %a.flex.flex-col.gap-1{href: course}
+      = link_to course_path(course.id), class: "flex flex-col gap-1" do
         %h3
           = course.title
         %p.line-clamp-3
@@ -24,5 +22,6 @@
       %h3
         = "#{course.price}€"
       %a.primary-button{ href: "!#"} Purchase
-      / = link_to 'Edit this course', edit_course_path(course), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium"
+      
+      = link_to 'Edit this course', edit_course_path(course), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium"
       / = link_to "Destroy course", course, data: {turbo_method: :delete}, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"

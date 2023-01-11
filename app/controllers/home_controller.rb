@@ -11,4 +11,8 @@ class HomeController < ApplicationController
             "https://source.unsplash.com/random/?plant"
         ]
     end
+
+    def activities
+        @activities = PublicActivity::Activity.all
+    end
 end

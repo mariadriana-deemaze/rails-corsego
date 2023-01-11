@@ -13,6 +13,11 @@ class Course < ApplicationRecord
 
     LEVELS = [:"Beginner", :"Intermedite", :"Advanced"]
 
+    # track courses activities 
+    include PublicActivity::Model
+    # https://github.com/public-activity/public_activity/issues/54
+    tracked owner: Proc.new{ |controller, model|  PublicActivity.set_controller(@controller) && controller.current_user }
+
     def to_s
         title
     end

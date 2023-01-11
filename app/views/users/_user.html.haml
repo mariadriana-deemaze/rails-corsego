@@ -28,9 +28,9 @@
       %p.text-sm.tracking-tight.text-gray-900.dark:text-white
         Confirmed e-mail?
         - if user.confirmed_at.present?
-          %span.bg-green-100.text-green-800.text-sm.font-medium.mr-2.px-2.5.py-0.5.rounded.dark:bg-green-200.dark:text-green-900 Yes
+          %span.badge-min.badge-green  Yes
         - else
-          %span.bg-red-100.text-red-800.text-sm.font-medium.mr-2.px-2.5.py-0.5.rounded.dark:bg-red-200.dark:text-red-900 No
+          %span.badge-min.badge-red  No
     
       / = link_to "Show this course", course, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"
       / = link_to 'Edit this course', edit_course_path(course), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium"

@@ -44,6 +44,9 @@ gem 'faker'
 # Use Sass to process CSS
 gem "sassc-rails"
 
+# hot reload
+gem "rails_live_reload"
+
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem "image_processing", "~> 1.2"
 
@@ -61,8 +64,11 @@ gem "tailwindcss-rails", "~> 2.0"
 # filtering 
 gem "ransack"
 
-# hot reload
-gem "rails_live_reload"
+# track user activities
+gem "public_activity"
+
+# user roles
+gem "rolify"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
