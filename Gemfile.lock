@@ -97,6 +97,11 @@ GEM
     diff-lcs (1.5.0)
     erubi (1.11.0)
     erubis (2.7.0)
+    factory_bot (6.2.1)
+      activesupport (>= 5.0.0)
+    factory_bot_rails (6.2.0)
+      factory_bot (~> 6.2.0)
+      railties (>= 5.0.0)
     faker (3.0.0)
       i18n (>= 1.8.11, < 2)
     ffi (1.15.5)
@@ -256,6 +261,8 @@ GEM
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
     sexp_processor (4.16.1)
+    shoulda-matchers (5.3.0)
+      activesupport (>= 5.2.0)
     simple_form (5.1.0)
       actionpack (>= 5.2)
       activemodel (>= 5.2)
@@ -310,6 +317,7 @@ DEPENDENCIES
   capybara
   debug
   devise
+  factory_bot_rails
   faker
   friendly_id (~> 5.4.0)
   haml
@@ -328,6 +336,7 @@ DEPENDENCIES
   rspec-rails
   sassc-rails
   selenium-webdriver
+  shoulda-matchers
   simple_form
   sprockets-rails
   stimulus-rails
