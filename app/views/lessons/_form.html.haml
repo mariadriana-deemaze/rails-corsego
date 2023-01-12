@@ -1,0 +1,8 @@
+= simple_form_for @lesson do |f|
+  = f.error_notification
+  = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+  .flex.flex-col.gap-3
+    = f.text_field :title
+    = f.text_area :content
+    = f.association :course
+    = f.button :submit

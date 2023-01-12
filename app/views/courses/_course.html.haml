@@ -35,6 +35,10 @@
       %p.text-sm.tracking-tight.text-gray-900.dark:text-white 
         = course.language
 
+      %p.text-sm
+        %b Lessons:
+        = course.lesson.count
+
     .flex.items-center.justify-between.w-full.border-t.border-gray-300.py-5
       %h3
         = "#{course.price}€"
