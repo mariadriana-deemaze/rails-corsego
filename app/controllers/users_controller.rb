@@ -16,7 +16,8 @@ class UsersController < ApplicationController
 
     def update
         if @user.update(user_params) 
-            redirect_to users_path, notice: "User #{@user.email} was successfully updated"
+            redirect_to users_path 
+            flash.now[:success] = "User #{@user.email} was successfully updated"
         else
             render :edit
         end

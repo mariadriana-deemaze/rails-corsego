@@ -1,5 +1,5 @@
 = simple_form_for @user do |f|
-  .flex.flex-col.gap-3
-    = f.collection_check_boxes :role_ids, Role.all, :id, :name
-    = f.error :roles
-    = f.button :submit
+  = render "shared/error_messages", object: f.object
+  = f.collection_check_boxes :role_ids, Role.all, :id, :name
+  = f.error :roles
+  = f.button :submit

@@ -40,12 +40,12 @@
     #mobile-menu-2.items-center.justify-between.hidden.w-full.md:flex.md:w-auto.md:order-1
       %ul.flex.flex-col.p-4.mt-4.border.border-gray-100.rounded-lg.bg-gray-50.md:flex-row.md:space-x-8.md:mt-0.md:text-sm.md:font-medium.md:border-0.md:bg-white.dark:bg-gray-800.md:dark:bg-gray-900.dark:border-gray-700
         %li
-          %a{:class =>"block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white", :href => root_path } Dashboard
+          = link_to "Dashboard", root_path, { :class => "header-link" }
         %li
-          %a{:class =>"block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white", :href => courses_path } Courses
+          = link_to "Courses", courses_path, { :class => "header-link" }
         %li
-          %a{:class =>"block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white", :href => users_path } Users
+          = link_to "Users", users_path, { :class => "header-link" }
         %li
-          %a{:class =>"block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white", :href => new_course_path } New course
+          = link_to "New course", new_course_path, { :class => "header-link" }
         %li
-          %a{:class =>"block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white", :href => home_activities_path } Activity
+          = link_to "Activity", home_activities_path, { :class => "header-link" }
