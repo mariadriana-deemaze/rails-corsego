@@ -23,6 +23,10 @@ class User < ApplicationRecord
     self.add_role(:student) if self.roles.blank?
   end
 
+  def online? 
+    updated_at > 2.minutes.ago
+  end
+
   private 
 
   def must_have_a_role 

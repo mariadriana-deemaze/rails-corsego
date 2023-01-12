@@ -20,10 +20,16 @@
         = course.description
 
       
-      = link_to user_path(course.user), class: "flex flex-row gap-2" do
-        = gravatar_for(course.user.email, size: 50, classes:"w-6 h-6 rounded-full border border-white")
-        %p 
-        = course.user.email
+      = link_to user_path(course.user) do
+        .flex.flex-row.gap-2
+          .relative.flex.w-2-h-2
+            - if course.user.online?
+              .absolute.w-2.h-2.flex.bg-green-400.top-0.right-0.rounded-full
+            - else
+              .absolute.w-2.h-2.flex.bg-red-700.top-0.right-0.rounded-full
+            = gravatar_for(course.user.email, size: 50, classes:"w-6 h-6 rounded-full border border-white")
+          %p 
+            = course.user.email
 
       / TODO: Find way to integrate flags/countries
       %p.text-sm.tracking-tight.text-gray-900.dark:text-white 
