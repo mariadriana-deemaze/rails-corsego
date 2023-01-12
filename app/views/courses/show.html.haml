@@ -4,3 +4,11 @@
   = link_to @course.title, courses_path(@course)
 .mx-auto.w-full.flex.flex-col.gap-4
   = render @course
+
+- if @lessons.count > 0
+  .mx-auto.w-full.flex.flex-col.gap-4
+    = @lessons.each do | lesson |
+      = render "lessons/lesson", lesson: lesson
+- else
+  %h4 
+    No lessons have been added yet...

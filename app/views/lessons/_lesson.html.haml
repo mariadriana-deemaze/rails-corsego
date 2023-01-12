@@ -1,14 +1,17 @@
-%div{:id => "#{dom_id lesson}"}
-  %p.my-5
-    %strong.block.font-medium.mb-1 Title:
+.flex.flex-row.gap-4.border.border-gray-300.rounded-md
+  .flex.flex-col
+    %b
+      Title:
     = lesson.title
-  %p.my-5
-    %strong.block.font-medium.mb-1 Content:
+  .flex.flex-col
+    %b
+      Content:
     = lesson.content
-  %p.my-5
-    %strong.block.font-medium.mb-1 Course:
+  .flex.flex-col
+    %b 
+      Course:
     = lesson.course_id
   - if action_name != "show"
     = link_to "Show this lesson", lesson, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"
     = link_to 'Edit this lesson', edit_lesson_path(lesson), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium"
-    %hr.mt-6/
+
