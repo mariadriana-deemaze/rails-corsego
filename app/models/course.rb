@@ -9,7 +9,7 @@ class Course < ApplicationRecord
     has_rich_text :description
     
     LANGUAGES = [:"English", :"Portuguese"]
-    LEVELS = [:"Beginner", :"Intermedite", :"Advanced"]
+    LEVELS = [:"Beginner", :"Intermediate", :"Advanced"]
     
     # gem `friendly_id`: adds course slug by title
     extend FriendlyId
