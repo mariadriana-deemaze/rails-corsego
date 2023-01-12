@@ -8,7 +8,11 @@ class User < ApplicationRecord
 
   has_many :courses
 
-  # associate with the rolify gem as the model that uses roles
+  # gem `friendly_id`: adds user slug by email
+  extend FriendlyId
+  friendly_id :email, use: :slugged
+
+  # gem `rolify`: associate with user roles
   rolify
 
   def to_s
