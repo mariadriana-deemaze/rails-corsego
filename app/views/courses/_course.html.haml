@@ -15,7 +15,7 @@
       %span.badge-min.badge-green.self-start
         = course.level
       %h3
-        = link_to course.title, course_path(course.id), class: "flex flex-col gap-1"
+        = link_to course.title, course_path(course), class: "flex flex-col gap-1"
       %p.line-clamp-3
         = course.description
 

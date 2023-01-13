@@ -3,6 +3,8 @@ class Lesson < ApplicationRecord
   
   belongs_to :course
   
+  has_rich_text :content
+
   # gem `friendly_id`: adds lesson slug by title
   extend FriendlyId
   friendly_id :title, use: :slugged

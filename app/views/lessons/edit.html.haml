@@ -2,4 +2,4 @@
   %h1.font-bold.text-4xl Editing lesson
   = render "form", lesson: @lesson
   = link_to "Show this lesson", @lesson, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"
-  = link_to "Back to lessons", lessons_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"
+  = link_to "Back to course", course_path(@lesson.course), class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"

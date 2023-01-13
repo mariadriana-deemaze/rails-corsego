@@ -13,6 +13,7 @@ class LessonsController < ApplicationController
   end
 
   def edit
+    authorize @lesson
   end
 
   def create
@@ -28,6 +29,7 @@ class LessonsController < ApplicationController
   end
 
   def update
+    authorize @lesson
     if @lesson.update(lesson_params)
       redirect_to lesson_url(@lesson)
       flash.now[:success] = "Lesson was successfully updated."
@@ -38,6 +40,7 @@ class LessonsController < ApplicationController
   end
 
   def destroy
+    authorize @lesson
     @lesson.destroy
     redirect_to lessons_url
     flash.now[:success] = "Lesson was successfully destroyed."

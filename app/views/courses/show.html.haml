@@ -1,12 +1,16 @@
 .flex.w-full.flex-row.gap-4.mb-10
   = link_to 'Courses', courses_path
   \/
-  = link_to @course.title, courses_path(@course)
+  = link_to @course.title, course_path(@course)
 .mx-auto.w-full.flex.flex-col.gap-4
   = render @course
 
+- if policy(@course).edit?
+  %button.primary-button{:type => "button"}
+    %a{:href => new_lesson_path(@course)} Add lesson
+
 - if @lessons.count > 0
-  .mx-auto.w-full.flex.flex-col.gap-4
+  .mx-auto.w-full.flex.flex-col
     = @lessons.each do | lesson |
       = render "lessons/lesson", lesson: lesson
 - else

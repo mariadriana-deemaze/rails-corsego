@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :edit, :show, :update]
   resources :courses
   resources :lessons
-  
   root 'home#index'
   get 'home/activities'
 end
