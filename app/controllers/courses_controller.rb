@@ -1,5 +1,6 @@
 class CoursesController < ApplicationController
-  before_action :set_course, only: %i[ show edit update destroy ]
+  before_action :set_course,           only: %i[ show edit update destroy ]
+  before_action :authorization_policy, only: %i[ edit ]
 
   def index
     @ransack_courses = Course.ransack(params[:courses_search], search_key: :courses_search)
@@ -15,7 +16,6 @@ class CoursesController < ApplicationController
   end
 
   def edit
-    authorize @course
   end
 
   def create
@@ -52,6 +52,10 @@ class CoursesController < ApplicationController
   private
     def set_course
       @course = Course.friendly.find(params[:id])
+    end
+
+    def authorization_policy
+      authorize @course
     end
 
     def course_params

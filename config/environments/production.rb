@@ -3,6 +3,15 @@ require "active_support/core_ext/integer/time"
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  # gem `exception_notification`: Alert via e-mail for any kind of production error
+  Rails.application.config.middleware.use ExceptionNotification::Rack,
+  email: {
+    email_prefix: '[PREFIX] ',
+    sender_address: %{"Corsego error" <support@corsego.com>},
+    exception_recipients: %w{maria.adriana.cardoso@deemaze.com}
+  }
+
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 

@@ -1,6 +1,7 @@
 class LessonsController < ApplicationController
-  before_action :set_course, only: %i[ show new create edit update destroy ]
-  before_action :set_lesson, only: %i[ show edit update destroy ]
+  before_action :set_course,           only: %i[ show new create edit update destroy ]
+  before_action :set_lesson,           only: %i[ show edit update destroy ]
+  before_action :authorization_policy, only: %i[ show edit update destroy ]
 
   def index
     @lessons = Lesson.all
@@ -14,7 +15,6 @@ class LessonsController < ApplicationController
   end
 
   def edit
-    authorize @lesson
   end
 
   def create
@@ -31,7 +31,6 @@ class LessonsController < ApplicationController
   end
 
   def update
-    authorize @lesson
     if @lesson.update(lesson_params)
       redirect_to course_lesson_path(@course, @lesson)
       flash.now[:success] = "Lesson was successfully updated."
@@ -42,9 +41,8 @@ class LessonsController < ApplicationController
   end
 
   def destroy
-    authorize @lesson
     @lesson.destroy
-    redirect_to lessons_url
+    redirect_to course_path(@course)
     flash.now[:success] = "Lesson was successfully destroyed."
   end
 
@@ -55,6 +53,10 @@ class LessonsController < ApplicationController
 
     def set_lesson
       @lesson = Lesson.friendly.find(params[:id])
+    end
+
+    def authorization_policy
+      authorize @lesson
     end
 
     def lesson_params

@@ -10,7 +10,7 @@ class LessonPolicy < ApplicationPolicy
   end
 
   def new? 
-    #self.has_access?
+    self.has_access?
   end
 
   def edit? 
@@ -26,7 +26,7 @@ class LessonPolicy < ApplicationPolicy
   end
   
   def create? 
-    #self.has_access?
+    self.has_access?
   end
   
   private
