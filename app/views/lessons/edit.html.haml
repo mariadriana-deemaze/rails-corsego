@@ -1,3 +1,5 @@
+= provide(:title, "Editing lesson #{@lesson.title.downcase}")
+
 .page-wrapper{:class => "md:w-2/3"}
   %h1.font-bold.text-4xl Editing lesson
   = render "form", lesson: @lesson
