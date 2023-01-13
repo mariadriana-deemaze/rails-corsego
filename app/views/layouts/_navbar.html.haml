@@ -39,13 +39,13 @@
     
     #mobile-menu-2.items-center.justify-between.hidden.w-full.md:flex.md:w-auto.md:order-1
       %ul.flex.flex-col.p-4.mt-4.border.border-gray-100.rounded-lg.bg-gray-50.md:flex-row.md:space-x-8.md:mt-0.md:text-sm.md:font-medium.md:border-0.md:bg-white.dark:bg-gray-800.md:dark:bg-gray-900.dark:border-gray-700
-        %li
-          = link_to "Dashboard", root_path, { :class => "header-link" }
-        %li
-          = link_to "Courses", courses_path, { :class => "header-link" }
-        %li
-          = link_to "Users", users_path, { :class => "header-link" }
-        %li
-          = link_to "New course", new_course_path, { :class => "header-link" }
-        %li
-          = link_to "Activity", home_activities_path, { :class => "header-link" }
+        - if current_user.nil?
+          = render "layouts/partials/navbar/initial"
+        - else
+          - if current_user.has_role?(:admin)
+            = render "layouts/partials/navbar/admin"
+          - elsif current_user.has_role?(:teacher)
+            = render "layouts/partials/navbar/teacher"
+          - else current_user.has_role?(:student)
+            = render "layouts/partials/navbar/student"
+

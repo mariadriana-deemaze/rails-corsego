@@ -9,8 +9,12 @@
 
 /* UI */
 
-.header-link{
-  @apply block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white
+.menu-item{
+  @apply block py-2 px-3 bg-transparent hover:bg-gray-100 rounded-md hover:text-blue-700
+}
+
+.menu-item.active{
+  @apply bg-gray-50 text-blue-700
 }
 
 .primary-button {

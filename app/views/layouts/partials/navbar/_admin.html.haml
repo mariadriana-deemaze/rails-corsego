@@ -1,0 +1,10 @@
+%li.menu-item{:class => "#{'active' if current_page?(root_path)}"}
+    = link_to "Homepage", root_path
+%li.menu-item{:class => "#{'active' if current_page?(courses_path)}"}
+    = link_to "Courses", courses_path
+%li.menu-item{:class => "#{'active' if current_page?(users_path)}"}
+    = link_to "Users", users_path
+%li.menu-item{:class => "#{'active' if current_page?(new_course_path)}"}
+    = link_to "New course", new_course_path
+%li.menu-item{:class => "#{'active' if current_page?(home_activities_path)}"}
+    = link_to "App Activity", home_activities_path

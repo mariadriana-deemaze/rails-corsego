@@ -12,9 +12,17 @@ admin = User.create!( email: 'mariaadriana15@gmail.com',
   admin.save!
   
   5.times do |index|
-    user = User.create!([{  email: Faker::Internet.safe_email(name: "random_email#{index}"),
-      password: psw,
-      password_confirmation: psw }])
+    user = User.create!( email: Faker::Internet.safe_email(name: "random_email#{index}"),
+                         password: psw,
+                         password_confirmation: psw)
+      
+    user.skip_confirmation!
+
+      # Exception to create teacher role
+      if index === 0 
+        user.add_role :teacher
+      end    
+                       
     end
     
     30.times do
