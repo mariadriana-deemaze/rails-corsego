@@ -70,6 +70,9 @@ gem "rolify"
 # user roles access policies
 gem "pundit", "~> 2.3"
 
+# pagination
+gem 'pagy', '~> 3.5'
+
 # alert production exception
 gem 'exception_notification'
 

@@ -1,18 +1,20 @@
-.flex.w-full.flex-row.gap-4.mb-10
+.breadcrumbs
   = link_to 'Courses', courses_path
   \/
   = link_to @course.title, course_path(@course)
-.mx-auto.w-full.flex.flex-col.gap-4
-  = render @course
 
-- if policy(@course).edit?
-  %button.primary-button{:type => "button"}
-    %a{:href => new_course_lesson_path(@course, @lesson)} Add lesson
+.page-wrapper
+  .mx-auto.w-full.flex.flex-col.gap-4
+    = render @course
 
-- if @lessons.count > 0
-  .mx-auto.w-full.flex.flex-col
-    = @lessons.each do | lesson |
-      = render "lessons/lesson", lesson: lesson
-- else
-  %h4 
-    No lessons have been added yet...
+  - if policy(@course).edit?
+    %button.primary-button{:type => "button"}
+      %a{:href => new_course_lesson_path(@course, @lesson)} Add lesson
+
+  - if @lessons.count > 0
+    .mx-auto.w-full.flex.flex-col.gap-2
+      = @lessons.each do | lesson |
+        = render "lessons/lesson", lesson: lesson
+  - else
+    %h4 
+      No lessons have been added yet...

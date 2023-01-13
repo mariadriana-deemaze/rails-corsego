@@ -21,6 +21,13 @@
   @apply rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700;
 }
 
+.breadcrumbs{
+  @apply flex w-full flex-row gap-4 mb-10 bg-gray-300 text-gray-900 font-semibold text-sm p-5
+}
+
+.page-wrapper{
+  @apply p-5 w-full flex flex-col items-start
+}
 
 .badge-min {
   @apply mr-2 px-2.5 py-0.5 rounded text-sm font-medium
@@ -37,6 +44,29 @@
 .badge-blue{
   @apply bg-blue-100 text-blue-800 dark:bg-blue-200 dark:text-blue-900
 }
+
+/* PAGINATION */
+.pagy-nav {
+  @apply inline-flex -space-x-px
+}
+
+.pagy-nav > .page{
+  @apply cursor-pointer px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white
+}
+
+.pagy-nav > .page.prev {
+  @apply rounded-l-lg
+}
+
+.pagy-nav > .page.next {
+  @apply rounded-r-lg
+}
+
+.pagy-nav > .page.active {
+  @apply px-3 py-2 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white
+
+}
+
 
 /* TEXT */
 h1,

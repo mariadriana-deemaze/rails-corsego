@@ -12,7 +12,7 @@
   %body
     %main.w-full.flex.flex-col
       = render 'layouts/navbar'
-      %div.w-full.p-5.mt-20
+      %div.w-full{:class => "mt-[73px]"}
         = render 'layouts/messages'
         = yield
-        = debug(params) if Rails.env.development?
+        =# debug(params) if Rails.env.development?

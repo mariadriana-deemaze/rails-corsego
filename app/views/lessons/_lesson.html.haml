@@ -1,17 +1,10 @@
 .flex.flex-row.gap-4.border.border-gray-300.rounded-md.p-5.justify-between
-  .flex.flex-row
-    .flex.flex-col
+  .flex.flex-col.gap-2
+    .flex.flex-row
       %b
-        Title:
-      = link_to lesson.title, course_lesson_path(@course, lesson)
-    .flex.flex-col
-      %b
-        Content:
+        = link_to lesson.title, course_lesson_path(@course, lesson)
+    .flex.flex-row
       = lesson.content
-    .flex.flex-col
-      %b 
-        Course:
-      = lesson.course_id
   .flex.flex-row.gap-2
     - if policy(lesson).edit?
       = link_to 'Edit this lesson', edit_course_lesson_path(@course, lesson), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium"

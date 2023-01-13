@@ -1,91 +1,92 @@
-.flex.w-full.justify-between
-  %h1.flex.flex-row.font-bold.text-4xl.gap-4.items-center
-    Users
-    %span.bg-blue-100.text-blue-800.text-xs.font-medium.mr-2.rounded-full.dark:bg-blue-900.dark:text-blue-300{:class =>"px-2.5 py-0.5" } 
-      = @total_users
+.page-wrapper
+  .flex.w-full.justify-between
+    %h1.flex.flex-row.font-bold.text-4xl.gap-4.items-center
+      Users
+      %span.bg-blue-100.text-blue-800.text-xs.font-medium.mr-2.rounded-full.dark:bg-blue-900.dark:text-blue-300{:class =>"px-2.5 py-0.5" } 
+        = @total_users
 
-.flex.flex-row.justify-between.mt-5
-  = search_form_for @q, class:"flex flex-row gap-2" do |f|
-    = f.search_field :email_cont, placeholder: "Search by e-mail", class:"block w-full p-2 pl-5 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-    = f.search_field :sign_in_count_eq, type: "number", placeholder: "Search by exact sign in count", class:"block w-full p-2 pl-5 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-    = f.submit class:"primary-button"
-  
-  = link_to users_path, class:"secondary-button" do
-    %svg.h-5{"aria-hidden" => "true", :fill => "none", :stroke => "currentColor", "stroke-width" => "1.5", :viewbox => "0 0 24 24", :xmlns => "http://www.w3.org/2000/svg"}
-      %path{:d => "M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 00-3.7-3.7 48.678 48.678 0 00-7.324 0 4.006 4.006 0 00-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3l-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 003.7 3.7 48.656 48.656 0 007.324 0 4.006 4.006 0 003.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3l-3 3", "stroke-linecap" => "round", "stroke-linejoin" => "round"}
+  .flex.flex-row.justify-between.mt-5
+    = search_form_for @q, class:"flex flex-row gap-2" do |f|
+      = f.search_field :email_cont, placeholder: "Search by e-mail", class:"block w-full p-2 pl-5 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      = f.search_field :sign_in_count_eq, type: "number", placeholder: "Search by exact sign in count", class:"block w-full p-2 pl-5 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      = f.submit class:"primary-button"
+    
+    = link_to users_path, class:"secondary-button" do
+      %svg.h-5{"aria-hidden" => "true", :fill => "none", :stroke => "currentColor", "stroke-width" => "1.5", :viewbox => "0 0 24 24", :xmlns => "http://www.w3.org/2000/svg"}
+        %path{:d => "M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 00-3.7-3.7 48.678 48.678 0 00-7.324 0 4.006 4.006 0 00-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3l-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 003.7 3.7 48.656 48.656 0 007.324 0 4.006 4.006 0 003.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3l-3 3", "stroke-linecap" => "round", "stroke-linejoin" => "round"}
 
-.relative.overflow-x-auto.shadow-md.sm:rounded-lg.mt-10.min-w-full
-  %table.w-full.text-sm.text-left.text-gray-500.dark:text-gray-400
-    %thead.text-xs.text-gray-700.uppercase.bg-gray-50.dark:bg-gray-700.dark:text-gray-400
-      %tr
-        %th.px-6.py-3{:scope => "col"}
-          .flex.items-center
-            Roles
-        %th.px-6.py-3{:scope => "col"}
-          .flex.items-center
-            = sort_link @q, :email
-        %th.px-6.py-3{:scope => "col"}
-          .flex.items-center
-            = sort_link @q, :sign_in_count
-        %th.px-6.py-3{:scope => "col"}
-          .flex.items-center
-            = sort_link @q, :current_sign_in_at
-        %th.px-6.py-3{:scope => "col"}
-          .flex.items-center
-            = sort_link @q, :last_sign_in_at
-        %th.px-6.py-3{:scope => "col"}
-          .flex.items-center
-            = sort_link @q, :current_sign_in_ip
-        %th.px-6.py-3{:scope => "col"}
-          .flex.items-center
-            = sort_link @q, :last_sign_in_ip
-        %th.px-6.py-3{:scope => "col"}
-          .flex.items-center
-            = sort_link @q, :confirmed_at
-        %th.px-6.py-3{:scope => "col"}
-          .flex.items-center
-            Edit
-    %tbody
+  .relative.overflow-x-auto.shadow-md.sm:rounded-lg.mt-10.min-w-full.border.border-gray-200
+    %table.w-full.text-sm.text-left.text-gray-500.dark:text-gray-400
+      %thead.text-xs.text-gray-700.uppercase.bg-gray-50.dark:bg-gray-700.dark:text-gray-400
+        %tr
+          %th.px-6.py-3{:scope => "col"}
+            .flex.items-center
+              Roles
+          %th.px-6.py-3{:scope => "col"}
+            .flex.items-center
+              = sort_link @q, :email
+          %th.px-6.py-3{:scope => "col"}
+            .flex.items-center
+              = sort_link @q, :sign_in_count
+          %th.px-6.py-3{:scope => "col"}
+            .flex.items-center
+              = sort_link @q, :current_sign_in_at
+          %th.px-6.py-3{:scope => "col"}
+            .flex.items-center
+              = sort_link @q, :last_sign_in_at
+          %th.px-6.py-3{:scope => "col"}
+            .flex.items-center
+              = sort_link @q, :current_sign_in_ip
+          %th.px-6.py-3{:scope => "col"}
+            .flex.items-center
+              = sort_link @q, :last_sign_in_ip
+          %th.px-6.py-3{:scope => "col"}
+            .flex.items-center
+              = sort_link @q, :confirmed_at, "E-mail confirmed?"
+          %th.px-6.py-3{:scope => "col"}
+            .flex.items-center
+              Edit
+      %tbody
 
-      - if @users.count > 0
-        - @users.each do |user|
-          %tr.bg-white.border-b.dark:bg-gray-800.dark:border-gray-700{:class => user === current_user && "border border-blue-200"}
-            %th.px-6.py-4.font-medium.text-gray-900.whitespace-nowrap.dark:text-white{:scope => "row"}
-              - user.roles.distinct.each do |role|
-                - if role.name === "admin"
-                  %span.badge-min.badge-red
-                    = role.name
-                - elsif role.name === "student"
-                  %span.badge-min.badge-blue
-                    = role.name
+        - if @users.count > 0
+          - @users.each do |user|
+            %tr.relative.bg-white.border-b.dark:bg-gray-800.dark:border-gray-700
+              %th.px-6.py-4.font-medium.text-gray-900.whitespace-nowrap.dark:text-white{:scope => "row", :class => user === current_user && "before:absolute before:content[''] before:top-0 before:left-0 before:w-full before:h-full before:border-2 before:border-blue-200"}
+                - user.roles.distinct.each do |role|
+                  - if role.name === "admin"
+                    %span.badge-min.badge-red
+                      = role.name
+                  - elsif role.name === "student"
+                    %span.badge-min.badge-blue
+                      = role.name
+                  - else
+                    %span.badge-min.badge-green
+                      = role.name
+              %th.px-6.py-4.font-medium.text-gray-900.whitespace-nowrap.dark:text-white{:scope => "row"}
+                = user.email
+              %th.px-6.py-4.font-medium.text-gray-900.whitespace-nowrap.dark:text-white{:scope => "row"}
+                = user.sign_in_count
+              %th.px-6.py-4.font-medium.text-gray-900.whitespace-nowrap.dark:text-white{:scope => "row"}
+                = user.current_sign_in_at
+              %th.px-6.py-4.font-medium.text-gray-900.whitespace-nowrap.dark:text-white{:scope => "row"}
+                = user.last_sign_in_at
+              %th.px-6.py-4.font-medium.text-gray-900.whitespace-nowrap.dark:text-white{:scope => "row"}
+                = user.current_sign_in_ip
+              %th.px-6.py-4.font-medium.text-gray-900.whitespace-nowrap.dark:text-white{:scope => "row"}
+                = user.last_sign_in_ip
+              %th.px-6.py-4.font-medium.text-gray-900.whitespace-nowrap.dark:text-white{:scope => "row"}
+                - if user.confirmed_at.present?
+                  %span.badge-min.badge-green Yes
                 - else
-                  %span.badge-min.badge-green
-                    = role.name
-            %th.px-6.py-4.font-medium.text-gray-900.whitespace-nowrap.dark:text-white{:scope => "row"}
-              = user.email
-            %th.px-6.py-4.font-medium.text-gray-900.whitespace-nowrap.dark:text-white{:scope => "row"}
-              = user.sign_in_count
-            %th.px-6.py-4.font-medium.text-gray-900.whitespace-nowrap.dark:text-white{:scope => "row"}
-              = user.current_sign_in_at
-            %th.px-6.py-4.font-medium.text-gray-900.whitespace-nowrap.dark:text-white{:scope => "row"}
-              = user.last_sign_in_at
-            %th.px-6.py-4.font-medium.text-gray-900.whitespace-nowrap.dark:text-white{:scope => "row"}
-              = user.current_sign_in_ip
-            %th.px-6.py-4.font-medium.text-gray-900.whitespace-nowrap.dark:text-white{:scope => "row"}
-              = user.last_sign_in_ip
-            %th.px-6.py-4.font-medium.text-gray-900.whitespace-nowrap.dark:text-white{:scope => "row"}
-              - if user.confirmed_at.present?
-                %span.badge-min.badge-green Yes
-              - else
-                %span.badge-min.badge-red No 
-            %th.px-6.py-4.font-medium.text-gray-900.whitespace-nowrap.dark:text-white{:scope => "row"}
-              = link_to edit_user_path(user) do
-                %svg.w-6.h-6{"aria-hidden" => "true", :fill => "none", :stroke => "currentColor", "stroke-width" => "1.5", :viewbox => "0 0 24 24", :xmlns => "http://www.w3.org/2000/svg"}
-                  %path{:d => "M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10", "stroke-linecap" => "round", "stroke-linejoin" => "round"}
-      - else
-        %tr.bg-white.border-b.dark:bg-gray-800.dark:border-gray-700
-          %th.col-span-7.px-6.py-4.font-medium.text-gray-900.whitespace-nowrap.dark:text-white{:scope => "row"}
-            No results were return...
+                  %span.badge-min.badge-red No 
+              %th.px-6.py-4.font-medium.text-gray-900.whitespace-nowrap.dark:text-white{:scope => "row"}
+                = link_to edit_user_path(user) do
+                  %svg.w-6.h-6{"aria-hidden" => "true", :fill => "none", :stroke => "currentColor", "stroke-width" => "1.5", :viewbox => "0 0 24 24", :xmlns => "http://www.w3.org/2000/svg"}
+                    %path{:d => "M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10", "stroke-linecap" => "round", "stroke-linejoin" => "round"}
+        - else
+          %tr.bg-white.border-b.dark:bg-gray-800.dark:border-gray-700
+            %th.col-span-7.px-6.py-4.font-medium.text-gray-900.whitespace-nowrap.dark:text-white{:scope => "row"}
+              No results were return...
 
 
 

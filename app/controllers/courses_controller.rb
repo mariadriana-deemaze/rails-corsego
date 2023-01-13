@@ -2,9 +2,14 @@ class CoursesController < ApplicationController
   before_action :set_course,           only: %i[ show edit update destroy ]
   before_action :authorization_policy, only: %i[ edit ]
 
+
+  
   def index
+    # gem 'ransack': apply filters
     @ransack_courses = Course.ransack(params[:courses_search], search_key: :courses_search)
-    @courses = @ransack_courses.result.includes(:user)
+    
+    # gem 'pagy': paginate collection
+    @pagy, @courses = pagy(@ransack_courses.result.includes(:user))
   end
 
   def show
