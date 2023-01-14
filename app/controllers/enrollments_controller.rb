@@ -4,6 +4,7 @@ class EnrollmentsController < ApplicationController
 
   def index
     @enrollments = Enrollment.all
+    authorize @enrollments
   end
 
   def show
@@ -14,6 +15,7 @@ class EnrollmentsController < ApplicationController
   end
 
   def edit
+    authorize @enrollment
   end
 
   def create
@@ -28,6 +30,7 @@ class EnrollmentsController < ApplicationController
   end
 
   def update
+    authorize @enrollment
     if @enrollment.update(enrollment_params)
       redirect_to @enrollment, notice: "Enrollment was successfully updated."
     else

@@ -5,6 +5,7 @@ class UsersController < ApplicationController
         @q = User.ransack(params[:q])
         @users = @q.result(distinct: true) 
         @total_users = User.count
+        authorize @users
     end
 
     def show 

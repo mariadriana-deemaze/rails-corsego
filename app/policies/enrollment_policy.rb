@@ -1,26 +1,23 @@
-class UserPolicy < ApplicationPolicy
+class EnrollmentPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       scope.all
     end
   end
-
+  
   def index? 
     @user.has_role?(:admin)
   end
 
   def edit? 
-    self.has_access?
+    @record.user_id == @user.id
   end
   
   def update? 
-    self.has_access?
+    @record.user_id == @user.id
   end
   
-  private
-
-  def has_access?
-    @record == @user || @user.has_role?(:admin)
+  def destroy? 
+    @user.has_role?(:admin)
   end
-
 end

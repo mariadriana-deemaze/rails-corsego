@@ -6,5 +6,7 @@
     = link_to "Users", users_path
 %li.menu-item{:class => "#{'active' if current_page?(new_course_path)}"}
     = link_to "New course", new_course_path
+%li.menu-item{:class => "#{'active' if current_page?(enrollments_path)}"}
+    = link_to "Enrollments", enrollments_path
 %li.menu-item{:class => "#{'active' if current_page?(home_activities_path)}"}
     = link_to "App Activity", home_activities_path
