@@ -1,0 +1,16 @@
+.flex.flex-row.gap-2.w-full.justify-between
+  .flex.flex-col.gap-2
+    %h1
+      = "Enroll to #{@course.title}"
+    = link_to "View course", course_path(@course), class:"link"
+    %h5
+      Do you want to proceed with this course purchase?
+    %p
+      You still have a refund garanty but I am too lazy to over explain it so here's a lorem ipsum dolor, sit amet consectetur adipisicing elit. Culpa explicabo est a nisi saepe sit, id itaque nam animi ea repudiandae ipsum? Maxime at cupiditate fugiat voluptate, pariatur praesentium distinctio.
+  .flex.flex-col.gap-2.items-end.justify-center
+    .flex.flex-col.gap-2.items-center
+      %h3
+        = format_price(@course.price)
+      = simple_form_for(@course, url:course_enrollments_path(@course), html: { method: :post }) do |f|
+        = f.button :submit, "Purchase course"
+      = link_to 'Back to enrollments', course_enrollments_path, class: "link"

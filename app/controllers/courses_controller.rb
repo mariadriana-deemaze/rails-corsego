@@ -13,7 +13,7 @@ class CoursesController < ApplicationController
   end
 
   def show
-    @lessons = @course.lesson
+    @lessons = @course.lessons
   end
 
   def new
@@ -61,6 +61,10 @@ class CoursesController < ApplicationController
 
     def authorization_policy
       authorize @course
+    end
+
+    def is_enrolled(user)
+      self.enrollments.where(user_id: [user.id], course_id: [self.id].empty?)
     end
 
     def course_params

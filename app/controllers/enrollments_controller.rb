@@ -1,36 +1,32 @@
 class EnrollmentsController < ApplicationController
-  before_action :set_enrollment, only: %i[ show edit update destroy ]
+  before_action :set_course,                       only: %i[ new create ]
+  before_action :set_enrollment,                   only: %i[ show edit update destroy ]
 
-  # GET /enrollments
   def index
     @enrollments = Enrollment.all
   end
 
-  # GET /enrollments/1
   def show
   end
 
-  # GET /enrollments/new
   def new
     @enrollment = Enrollment.new
   end
 
-  # GET /enrollments/1/edit
   def edit
   end
 
-  # POST /enrollments
   def create
-    @enrollment = Enrollment.new(enrollment_params)
-
-    if @enrollment.save
-      redirect_to @enrollment, notice: "Enrollment was successfully created."
+    if @course.price > 0
+      flash[:alert] = "You cannot access paid courses yet."
+      redirect_to new_course_enrollment_path(@course)
     else
-      render :new, status: :unprocessable_entity
+      @enrollment = current_user.enroll_to_course(@course)
+      flash[:success] = "Success! Enjoy your new course."
+      redirect_to course_path(@course)
     end
   end
 
-  # PATCH/PUT /enrollments/1
   def update
     if @enrollment.update(enrollment_params)
       redirect_to @enrollment, notice: "Enrollment was successfully updated."
@@ -39,20 +35,21 @@ class EnrollmentsController < ApplicationController
     end
   end
 
-  # DELETE /enrollments/1
   def destroy
     @enrollment.destroy
     redirect_to enrollments_url, notice: "Enrollment was successfully destroyed."
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+    def set_course
+      @course = Course.friendly.find(params[:course_id])
+    end
+    
     def set_enrollment
       @enrollment = Enrollment.find(params[:id])
     end
-
-    # Only allow a list of trusted parameters through.
+    
     def enrollment_params
-      params.require(:enrollment).permit(:user_id, :course_id, :rating, :review, :price)
+      params.require(:enrollment).permit(:rating, :review)
     end
 end

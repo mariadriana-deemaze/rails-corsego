@@ -1,0 +1,20 @@
+%div{:id => "#{dom_id enrollment}"}
+  %p.my-5
+    %strong.block.font-medium.mb-1 User:
+    = enrollment.user_id
+  %p.my-5
+    %strong.block.font-medium.mb-1 Course:
+    = enrollment.course_id
+  %p.my-5
+    %strong.block.font-medium.mb-1 Rating:
+    = enrollment.rating
+  %p.my-5
+    %strong.block.font-medium.mb-1 Review:
+    = enrollment.review
+  %p.my-5
+    %strong.block.font-medium.mb-1 Price:
+    = enrollment.price
+  - if action_name != "show"
+    = link_to "Show this enrollment", enrollment, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"
+    = link_to 'Edit this enrollment', edit_enrollment_path(enrollment), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium"
+    %hr.mt-6/

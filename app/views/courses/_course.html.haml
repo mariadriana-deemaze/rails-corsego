@@ -34,6 +34,7 @@
       / TODO: Find way to integrate flags/countries
       %p.text-sm.tracking-tight.text-gray-900.dark:text-white 
         = course.language
+      
 
       %p.text-sm
         %b Lessons:
@@ -41,5 +42,5 @@
 
     .flex.items-center.justify-between.w-full.border-t.border-gray-300.py-5
       %h3
-        = "#{course.price}€"
-      %a.primary-button{ href: "!#"} Purchase
+        = format_price(course.price)
+      = enrollment_button(course)

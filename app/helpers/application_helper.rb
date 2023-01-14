@@ -1,4 +1,6 @@
 module ApplicationHelper
+    include Pagy::Frontend
+
     def page_full_title(page_title = '')
         base_title = "Corsego"
         if page_title.empty?
@@ -7,6 +9,8 @@ module ApplicationHelper
             base_title + " | " + page_title
         end
     end
-    # Include it in the helpers (e.g. application_helper.rb)
-    include Pagy::Frontend
+
+    def format_price(price = 0)
+        number_to_currency(price, unit: "€", format: "%n %u")
+    end
 end
