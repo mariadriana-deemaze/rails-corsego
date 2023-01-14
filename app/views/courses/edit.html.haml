@@ -1,11 +1,12 @@
 = provide(:title, "Editing #{@course.title.downcase} course")
 
 .breadcrumbs
-  = link_to 'Courses', courses_path
-  \/
-  = link_to @course.title, course_path(@course)
+  .container
+    = link_to 'Courses', courses_path
+    \/
+    = link_to @course.title, course_path(@course)
 
-.page-wrapper{:class => "md:w-2/3"}
+.container
   %h1.font-bold.text-4xl Editing course
   = render "form", course: @course
   = link_to "Show this course", @course, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"

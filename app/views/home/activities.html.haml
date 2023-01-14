@@ -1,47 +1,48 @@
-- if @activities.count > 0
-    - @activities.each do |activity|
-        %ul.border
-            %li
-                = link_to activity.trackable, activity.trackable
-            %li
-                %b 
-                    = "#{activity.trackable_type.humanize}:"
-                = activity.trackable_type
-            %li
-                %b 
-                    = "#{activity.trackable_id.to_s.humanize}:"
-                = activity.trackable_id
-            %li
-                %b 
-                    = "#{activity.owner_id.to_s.humanize}:"
-                = activity.owner_id
-            %li
-                %b 
-                    = "#{activity.parameters.to_s.humanize}:"
-                = activity.parameters
-            %li
-                %b 
-                    = "#{activity.key.to_s.humanize}:"
-                = activity.key
-            %li
-                %b 
-                    = "#{activity.recipient_type.to_s.humanize}:"
-                = activity.recipient_type
-            %li 
-                %b 
-                    = "#{activity.owner_id.to_s.humanize}:"
-                = activity.owner_id
-            %li 
-                %b 
-                    = "#{activity.owner.to_s.humanize}:"
-                = activity.owner
-            %li
-                %b 
-                    = "#{activity.created_at.to_s.humanize}:"
-                = activity.created_at
-            %li
-                %b 
-                    = "#{activity.updated_at.to_s.humanize}:"
-                = activity.updated_at
-- else
-    %p Nothing to see here
+.container
+    - if @activities.count > 0
+        - @activities.each do |activity|
+            %ul.border
+                %li
+                    = link_to activity.trackable, activity.trackable
+                %li
+                    %b 
+                        = "#{activity.trackable_type.humanize}:"
+                    = activity.trackable_type
+                %li
+                    %b 
+                        = "#{activity.trackable_id.to_s.humanize}:"
+                    = activity.trackable_id
+                %li
+                    %b 
+                        = "#{activity.owner_id.to_s.humanize}:"
+                    = activity.owner_id
+                %li
+                    %b 
+                        = "#{activity.parameters.to_s.humanize}:"
+                    = activity.parameters
+                %li
+                    %b 
+                        = "#{activity.key.to_s.humanize}:"
+                    = activity.key
+                %li
+                    %b 
+                        = "#{activity.recipient_type.to_s.humanize}:"
+                    = activity.recipient_type
+                %li 
+                    %b 
+                        = "#{activity.owner_id.to_s.humanize}:"
+                    = activity.owner_id
+                %li 
+                    %b 
+                        = "#{activity.owner.to_s.humanize}:"
+                    = activity.owner
+                %li
+                    %b 
+                        = "#{activity.created_at.to_s.humanize}:"
+                    = activity.created_at
+                %li
+                    %b 
+                        = "#{activity.updated_at.to_s.humanize}:"
+                    = activity.updated_at
+    - else
+        %p Nothing to see here

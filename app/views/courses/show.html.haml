@@ -1,11 +1,12 @@
 = provide(:title, "Course #{@course.title.downcase}")
 
 .breadcrumbs
-  = link_to 'Courses', courses_path
-  \/
-  = link_to @course.title, course_path(@course)
+  .container
+    = link_to 'Courses', courses_path
+    \/
+    = link_to @course.title, course_path(@course)
 
-.page-wrapper
+.container
   .mx-auto.w-full.flex.flex-col.gap-4
     = render @course
 

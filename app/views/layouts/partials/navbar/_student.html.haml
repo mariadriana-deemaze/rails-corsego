@@ -2,7 +2,7 @@
     = link_to "Homepage", root_path
 %li.menu-item{:class => "#{'active' if current_page?(courses_path)}"}
     = link_to "Explore courses", courses_path
-%li.menu-item
-    = link_to "My courses", "!#"
+%li.menu-item{:class => "#{'active' if current_page?(enrollments_path)}"}
+    = link_to "My courses", enrollments_path
 %li.menu-item{:class => "#{'active' if current_page?(home_activities_path)}"}
     = link_to "Courses updates", home_activities_path
