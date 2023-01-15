@@ -13,4 +13,8 @@ module ApplicationHelper
     def format_price(price = 0)
         number_to_currency(price, unit: "€", format: "%n %u")
     end
+
+    def format_date(date)
+        date.strftime("%Y/%m/%d at %H:%M")
+    end
 end

@@ -49,7 +49,6 @@
             .flex.items-center
               Edit
       %tbody
-
         - if @users.count > 0
           - @users.each do |user|
             %tr.relative.bg-white.border-b.dark:bg-gray-800.dark:border-gray-700
@@ -89,6 +88,11 @@
           %tr.bg-white.border-b.dark:bg-gray-800.dark:border-gray-700
             %th.col-span-7.px-6.py-4.font-medium.text-gray-900.whitespace-nowrap.dark:text-white{:scope => "row"}
               No results were return...
+
+
+  - if @users.count > 0
+    %div.my-5{:class => "mb-[35px]"}
+      != pagy_nav(@pagy)
 
 
 

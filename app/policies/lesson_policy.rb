@@ -6,7 +6,7 @@ class LessonPolicy < ApplicationPolicy
   end
   
   def show? 
-    self.has_access? || @record.course.bought(@user) == false
+    self.has_access? || @record.course.bought(@user) == true
   end
 
   def new? 

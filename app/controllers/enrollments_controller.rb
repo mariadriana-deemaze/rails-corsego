@@ -3,7 +3,9 @@ class EnrollmentsController < ApplicationController
   before_action :set_enrollment,                   only: %i[ show edit update destroy ]
 
   def index
-    @enrollments = Enrollment.all
+    # gem 'pagy': paginate collection
+    @pagy, @enrollments = pagy(Enrollment.all)
+
     authorize @enrollments
   end
 

@@ -7,10 +7,27 @@
     = enrollment.course_id
   %p.my-5
     %strong.block.font-medium.mb-1 Rating:
-    = enrollment.rating
+    - if enrollment.rating.nil? 
+      N/A
+      - if current_user && policy(enrollment).edit?
+        = link_to 'Add rating', edit_enrollment_path(enrollment), class:"link"
+    - else
+      = enrollment.rating
+      - if current_user && policy(enrollment).edit?
+        = link_to 'Edit rating', edit_enrollment_path(enrollment), class:"link"
   %p.my-5
     %strong.block.font-medium.mb-1 Review:
-    = enrollment.review
+    - if enrollment.review.nil? 
+      N/A
+      - if current_user && policy(enrollment).edit?
+        = link_to 'Add review', edit_enrollment_path(enrollment), class:"link"
+    - else
+      = enrollment.review
+      - if current_user && policy(enrollment).edit?
+        = link_to 'Edit review', edit_enrollment_path(enrollment), class:"link"
+  %p.my-5
+    %strong.block.font-medium.mb-1 Enrolled at:
+    = time_ago_in_words(enrollment.created_at)
   %p.my-5
     %strong.block.font-medium.mb-1 Price:
     = enrollment.price

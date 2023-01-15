@@ -1,5 +1,5 @@
 = simple_form_for(@enrollment) do |f|
   .flex.flex-col
-    = f.text_area :review, rows: 4
-    = f.number_field :rating
+    = f.input :rating, collection: 1..5, as: :radio_buttons
+    = f.input :review, rows:4
     = f.button :submit

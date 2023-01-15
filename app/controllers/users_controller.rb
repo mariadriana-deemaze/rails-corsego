@@ -3,8 +3,11 @@ class UsersController < ApplicationController
 
     def index
         @q = User.ransack(params[:q])
-        @users = @q.result(distinct: true) 
         @total_users = User.count
+
+        # gem 'pagy': paginate collection
+        @pagy, @users = pagy(@q.result(distinct: true) )
+
         authorize @users
     end
 
