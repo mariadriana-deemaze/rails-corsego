@@ -2,8 +2,6 @@ class CoursesController < ApplicationController
   before_action :set_course,           only: %i[ show edit update destroy ]
   before_action :authorization_policy, only: %i[ edit ]
 
-
-  
   def index
     # gem 'ransack': apply filters
     @ransack_courses = Course.ransack(params[:courses_search], search_key: :courses_search)
@@ -52,6 +50,20 @@ class CoursesController < ApplicationController
     @course.destroy
     redirect_to courses_url
     flash[:success] = "Course was successfully destroyed."
+  end
+
+  # student
+  def purchased
+    # gem 'pagy': paginate collection
+    @pagy, @courses = pagy(Course.joins(:enrollments).where(enrollments: { user:current_user }))
+    render 'index'
+  end
+
+  # teacher
+  def created
+    # gem 'pagy': paginate collection
+    @pagy, @courses = pagy(Course.where(user: current_user))
+    render 'index'
   end
 
   private

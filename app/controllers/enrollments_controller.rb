@@ -45,16 +45,22 @@ class EnrollmentsController < ApplicationController
     redirect_to enrollments_url, notice: "Enrollment was successfully destroyed."
   end
 
+  # teacher
+  def my_students 
+    @enrollments = Enrollment.joins(:course).where(courses: {user:current_user})
+    render 'index'
+  end
+
   private
-    def set_course
-      @course = Course.friendly.find(params[:course_id])
-    end
-    
-    def set_enrollment
-      @enrollment = Enrollment.find(params[:id])
-    end
-    
-    def enrollment_params
-      params.require(:enrollment).permit(:rating, :review)
-    end
+  def set_course
+    @course = Course.friendly.find(params[:course_id])
+  end
+  
+  def set_enrollment
+    @enrollment = Enrollment.friendly.find(params[:id])
+  end
+  
+  def enrollment_params
+    params.require(:enrollment).permit(:rating, :review)
+  end
 end

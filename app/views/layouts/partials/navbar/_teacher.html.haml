@@ -2,9 +2,19 @@
     = link_to "Homepage", root_path
 %li.menu-item{:class => "#{'active' if current_page?(courses_path)}"}
     = link_to "Explore courses", courses_path
-%li.menu-item{:class => "#{'active' if current_page?(new_course_path)}"}
-    = link_to "New course", new_course_path
-%li.menu-item{:class => "#{'active' if current_page?(users_path)}"}
-    = link_to "My students", users_path
-%li.menu-item{:class => "#{'active' if current_page?(home_activities_path)}"}
-    = link_to "Courses activity", home_activities_path
+%li
+    %button#dropdownDefaultButton.text-white.bg-blue-700.hover:bg-blue-800.focus:ring-4.focus:outline-none.focus:ring-blue-300.font-medium.rounded-lg.text-sm.px-4.text-center.inline-flex.items-center.dark:bg-blue-600.dark:hover:bg-blue-700.dark:focus:ring-blue-800{class: "py-2.5", "data-dropdown-toggle" => "dropdown", type: "button"}
+        Teach
+        %svg.w-4.h-4.ml-2{"aria-hidden" => "true", fill: "none", stroke: "currentColor", viewbox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg"}
+            %path{d: "M19 9l-7 7-7-7", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2"}
+    / Dropdown menu
+    #dropdown.z-10.hidden.bg-white.divide-y.divide-gray-100.rounded.shadow.w-44.dark:bg-gray-700
+        %ul.py-1{"aria-labelledby" => "dropdownDefaultButton"}
+            %li
+                %a.dropdown-item{ href: new_course_path} New course
+            %li
+                %a.dropdown-item{ href: created_courses_path } My courses
+            %li
+                %a.dropdown-item{ href: my_students_enrollments_path } My students
+            %li
+                %a.dropdown-item{ href: activity_path } Courses activity
