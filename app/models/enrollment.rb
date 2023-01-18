@@ -6,7 +6,7 @@ class Enrollment < ApplicationRecord
   validates_presence_of :review, if: :rating?
   validate :cant_subscribe_to_own_course
   
-  belongs_to :user
+  belongs_to :user, counter_cache: true
   belongs_to :course, counter_cache: true
   
   scope :pending_review, -> { where(rating: [0, nil, ""], review:[0,nil,""]) }
