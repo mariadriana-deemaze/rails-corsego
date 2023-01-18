@@ -7,10 +7,20 @@ class Enrollment < ApplicationRecord
   validate :cant_subscribe_to_own_course
   
   belongs_to :user
-  belongs_to :course
+  belongs_to :course, counter_cache: true
   
   scope :pending_review, -> { where(rating: [0, nil, ""], review:[0,nil,""]) }
   
+  after_save do
+    unless rating.nil? || rating.zero?
+      course.update_rating
+    end
+  end
+
+  after_destroy do 
+    course.update_rating
+  end
+
   # gem `friendly_id`: adds course slug by title
   extend FriendlyId
   friendly_id :to_s, use: :slugged
@@ -18,6 +28,7 @@ class Enrollment < ApplicationRecord
   def to_s 
     user.to_s + " " + course.to_s
   end
+
 
   protected
   def cant_subscribe_to_own_course 
