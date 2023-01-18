@@ -2,12 +2,32 @@
 
 .flex.flex-col.gap-4
     .flex.flex-col.py-40.border-b.border-r-amber-400.items-center.justify-center
+        %h2 Continue from where you left of
+        .relative.grid.grid-cols-3.gap-4.mt-10
+            - @purchased_courses.each do |purchased|
+                = render 'courses/course', course: purchased
+    .flex.flex-col.py-40.border-b.border-r-amber-400.items-center.justify-center
         %h2 Latest Courses
         .relative.grid.grid-cols-3.gap-4.mt-10
-            - @latest_courses.each do |latest_course|
-                = render 'courses/course', course: latest_course
+            - @latest_courses.each do |latest|
+                = render 'courses/course', course: latest
+    .flex.flex-col.py-40.border-b.border-r-amber-400.items-center.justify-center
+        %h2 Top rated courses
+        .relative.grid.grid-cols-3.gap-4.mt-10
+            - @top_rated_courses.each do |top_rated|
+                = render 'courses/course', course: top_rated
+    .flex.flex-col.py-40.border-b.border-r-amber-400.items-center.justify-center
+        %h2 Popular Courses
+        .relative.grid.grid-cols-3.gap-4.mt-10
+            - @popular_courses.each do |popular|
+                = render 'courses/course', course: popular
     .flex.flex-col.py-40.border-b.border-r-amber-400.items-center.justify-center
         %h2 Courses
         .relative.grid.grid-cols-3.gap-4.mt-10
             - @courses.each do |course|
                 = render 'courses/course', course: course
+    .flex.flex-col.py-40.border-b.border-r-amber-400.items-center.justify-center
+        %h2 What are students are saying
+        .relative.grid.grid-cols-3.gap-4.mt-10
+            - @reviews.each do |review|
+                = render 'enrollments/enrollment', enrollment: review
