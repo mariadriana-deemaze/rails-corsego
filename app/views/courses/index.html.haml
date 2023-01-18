@@ -22,9 +22,13 @@
           .flex.flex-col
             = f.label :user_email, class:"form-label"
             = f.search_field :user_email_cont, placeholder: "Search by user", class:"form-input"
-          .flex.flex-col  
-            = f.label :price, class:"form-label"
-            = f.search_field :price_eq, type: "number", placeholder: "Search by price", class:"form-input"
+          = sort_link(@ransack_courses, :price)
+          = sort_link(@ransack_courses, :average_rating, "Popularity")
+          = sort_link(@ransack_courses, :created_at)
+          = sort_link(@ransack_courses, :enrollments_count)
+          /.flex.flex-col  
+          /  = f.label :price, class:"form-label"
+          /  = f.search_field :price_eq, type: "number", placeholder: "Search by price", class:"form-input"
           .flex.flex-row.gap-2
             = f.submit class:"primary-button w-full"
             = link_to courses_path, class:"secondary-button" do
