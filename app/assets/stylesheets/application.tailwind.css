@@ -30,7 +30,11 @@
 }
 
 .breadcrumbs{
-  @apply flex w-full flex-row gap-4 mb-10 bg-gray-50 text-gray-900 font-semibold text-sm p-5
+  @apply flex w-full flex-row gap-4 mb-10 bg-gray-50 text-gray-900 font-normal text-sm p-3
+}
+
+.breadcrumbs > .container a {
+  @apply last:font-semibold
 }
 
 .container {

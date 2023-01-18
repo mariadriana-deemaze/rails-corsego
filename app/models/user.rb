@@ -8,6 +8,7 @@ class User < ApplicationRecord
 
   has_many :courses
   has_many :enrollments
+  has_many :user_lessons
 
   # gem `friendly_id`: adds user slug by email
   extend FriendlyId
@@ -30,6 +31,12 @@ class User < ApplicationRecord
 
   def enroll_to_course(course)
     self.enrollments.create(course: course, price: course.price)
+  end
+
+  def mark_as_viewed(lesson)
+    unless self.user_lessons.where(lesson: lesson).any? 
+      self.user_lessons.create(lesson: lesson)
+    end
   end
 
   private 
