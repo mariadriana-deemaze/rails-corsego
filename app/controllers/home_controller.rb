@@ -2,11 +2,11 @@ class HomeController < ApplicationController
     skip_before_action :authenticate_user!, :only => [:index]
     def index
         @courses            = Course.all.limit(3)
-        @latest_courses     = Course.all.order(created_at: :desc).limit(3)
-        @top_rated_courses  = Course.order(average_rating: :desc, created_at: :desc).limit(3)
-        @popular_courses    = Course.order(enrollments_count: :desc, created_at: :desc).limit(3)
+        @latest_courses     = Course.reviewed.latest
+        @top_rated_courses  = Course.top_rated
+        @popular_courses    = Course.popular
         @purchased_courses  = Course.joins(:enrollments).where(enrollments: { user: current_user }).order(created_at: :desc).limit(3)
-        @reviews            = Enrollment.reviewed.order(created_at: :desc, rating: :desc).limit(3)
+        @reviews            = Enrollment.latest_reviews
         
         @sliders            = [
             "https://source.unsplash.com/random/?fruit",

@@ -10,7 +10,8 @@ class Enrollment < ApplicationRecord
   belongs_to :course, counter_cache: true
   
   scope :pending_review, -> { where(rating: [0, nil, ""], review:[0,nil,""]) }
-  scope :reviewed, -> { where.not(review: [0, nil, ""]) }
+  scope :reviewed,       -> { where.not(review: [0, nil, ""]) }
+  scope :latest_reviews, -> { order(created_at: :desc, rating: :desc).limit(3) }
   
   after_save do
     unless rating.nil? || rating.zero?
