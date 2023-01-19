@@ -1,8 +1,8 @@
 .container.flex.flex-col.gap-4
     .flex.flex-col.gap-4
         %h3 Users created per hour
-        = line_chart User.group_by_hour(:created_at).count
+        = line_chart charts_users_per_hour_path
 
     .flex.flex-col.gap-4
         %h3 Enrollments per day
-        = line_chart Enrollment.group_by_day(:created_at).count
+        = line_chart charts_enrollments_per_day_path
