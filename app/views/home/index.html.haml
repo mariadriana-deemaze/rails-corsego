@@ -1,11 +1,12 @@
 = render "home/slider", slides: @sliders
 
 .flex.flex-col.gap-4
-    .flex.flex-col.py-40.border-b.border-r-amber-400.items-center.justify-center
-        %h2 Continue from where you left of
-        .relative.grid.grid-cols-3.gap-4.mt-10
-            - @purchased_courses.each do |purchased|
-                = render 'courses/course', course: purchased
+    - if @purchased_courses.any?
+        .flex.flex-col.py-40.border-b.border-r-amber-400.items-center.justify-center
+            %h2 Continue from where you left of
+            .relative.grid.grid-cols-3.gap-4.mt-10
+                - @purchased_courses.each do |purchased|
+                    = render 'courses/course', course: purchased
     .flex.flex-col.py-40.border-b.border-r-amber-400.items-center.justify-center
         %h2 Latest Courses
         .relative.grid.grid-cols-3.gap-4.mt-10

@@ -73,6 +73,12 @@ gem "pundit", "~> 2.3"
 # pagination
 gem 'pagy', '~> 3.5'
 
+# charts
+gem "chartkick"
+
+# agreggate data utils
+gem "groupdate"
+
 # alert production exception
 gem 'exception_notification'
 

@@ -11,5 +11,6 @@ Rails.application.routes.draw do
   end
   root 'home#index'
   get 'activity', to: 'home#activities'
+  get 'statistics', to: 'home#statistics'
   get 'static_pages/privacy_policy'
 end
