@@ -1,6 +1,6 @@
 class CoursesController < ApplicationController
   before_action :set_course,           only: %i[ show edit update destroy ]
-  before_action :authorization_policy, only: %i[ edit ]
+  before_action :authorization_policy, only: %i[ edit destroy ]
 
   def index
     # gem 'ransack': apply filters
@@ -12,6 +12,7 @@ class CoursesController < ApplicationController
 
   def show
     @lessons = @course.lessons
+    @enrollments_with_review = @course.enrollments.reviewed
   end
 
   def new
@@ -47,9 +48,13 @@ class CoursesController < ApplicationController
   end
 
   def destroy
-    @course.destroy
-    redirect_to courses_url
-    flash[:success] = "Course was successfully destroyed."
+    if @course.destroy
+      redirect_to courses_url
+      flash[:success] = "Course was successfully destroyed."
+    else
+      redirect_to @course
+      flash[:success] = "Course has enrollments. Cannot be destroyed."
+    end
   end
 
   # student
