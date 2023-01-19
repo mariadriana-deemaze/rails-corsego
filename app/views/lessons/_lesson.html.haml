@@ -13,9 +13,3 @@
         = link_to lesson.title, course_lesson_path(@course, lesson)
     .flex.flex-row
       = lesson.content
-  .flex.flex-row.gap-2
-    - if policy(lesson).edit?
-      = link_to 'Edit this lesson', edit_course_lesson_path(@course, lesson), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium"
-    - if policy(lesson).destroy?
-      = link_to 'Destroy', [@course, lesson], data: {turbo_method: :delete}, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"
-

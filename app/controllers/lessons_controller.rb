@@ -9,6 +9,7 @@ class LessonsController < ApplicationController
 
   def show
     current_user.mark_as_viewed(@lesson)
+    @lessons = @course.lessons
   end
 
   def new
