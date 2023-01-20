@@ -24,6 +24,7 @@
     .flex.flex-col.rounded-lg.border.border-gray-200.bg-white.p-5.gap-4
       .flex.flex-row.p-3.rounded-md.bg-gray-300
         = "Progress #{number_to_percentage(@course.progress(@course.user), { precision: 0 })}"
+        = @lesson.user_lessons.where(user: current_user).first.impressions
       %ul.flex.flex-col.gap-4
         - @lessons.each do | lesson |
           - if lesson == @lesson
