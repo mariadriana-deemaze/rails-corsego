@@ -10,9 +10,14 @@ class Course < ApplicationRecord
 
     has_rich_text :description
 
-    scope :latest,    -> { limit(3).order(created_at: :desc) }
-    scope :top_rated, -> { limit(3).order(average_rating: :desc, created_at: :desc) }
-    scope :popular,   -> { limit(3).order(enrollments_count: :desc, created_at: :desc) }
+    scope :latest,      -> { limit(3).order(created_at: :desc) }
+    scope :top_rated,   -> { limit(3).order(average_rating: :desc, created_at: :desc) }
+    scope :popular,     -> { limit(3).order(enrollments_count: :desc, created_at: :desc) }
+    scope :published,   -> { where(published: true) }
+    scope :approved,    -> { where(approved: true) }
+    scope :unpublished, -> { where(published: false) }
+    scope :unapproved,  -> { where(approved: false) }
+
     
     LANGUAGES = [:"English", :"Portuguese"]
     LEVELS = [:"Beginner", :"Intermediate", :"Advanced"]

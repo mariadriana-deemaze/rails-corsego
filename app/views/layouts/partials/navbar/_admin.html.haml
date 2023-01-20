@@ -2,6 +2,8 @@
     = link_to "Homepage", root_path
 %li.menu-item{:class => "#{'active' if current_page?(courses_path)}"}
     = link_to "Courses", courses_path
+%li.menu-item{:class => "#{'active' if current_page?(unapproved_courses_path)}"}
+    = link_to "Unapproved courses", unapproved_courses_path
 %li.menu-item{:class => "#{'active' if current_page?(users_path)}"}
     = link_to "Users", users_path
 %li.menu-item{:class => "#{'active' if current_page?(new_course_path)}"}

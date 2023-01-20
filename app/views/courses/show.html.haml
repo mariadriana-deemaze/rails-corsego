@@ -16,6 +16,18 @@
     = "Progress #{number_to_percentage(@course.progress(@course.user), {precision:0})}"
 
   .flex.flex-col.gap-4
+    - if policy(@course).publish?
+      - if @course.published?
+        = link_to 'Published', unpublish_course_path(@course), data: {turbo_method: :patch}, class: "secondary-button"
+      - else
+        = link_to 'Unpublished', publish_course_path(@course),data: {turbo_method: :patch}, class: "secondary-button"
+    
+    - if policy(@course).approve?
+      - if @course.approved?
+        = link_to 'Unapprove', unapprove_course_path(@course), data: {turbo_method: :patch}, class: "secondary-button"
+      - else
+        = link_to 'Approve', approve_course_path(@course), data: {turbo_method: :patch}, class: "secondary-button"
+
     - if policy(@course).edit?
       %button.primary-button{:type => "button"}
         %a{:href => new_course_lesson_path(@course, @lesson)} Add lesson

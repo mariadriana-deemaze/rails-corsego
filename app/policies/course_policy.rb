@@ -9,6 +9,14 @@ class CoursePolicy < ApplicationPolicy
     self.has_access?
   end
 
+  def show? 
+    visible = @record.published && @record.approved
+    isAdmin = @user.present? && @user.has_role?(:admin)
+    purchased = @user.present? && @record.bought(@user)
+
+    visible || isAdmin || purchased
+  end
+
   def edit? 
     self.has_access?
   end
@@ -23,6 +31,14 @@ class CoursePolicy < ApplicationPolicy
   
   def create? 
     self.has_access?
+  end
+
+  def approve?
+    @user.has_role?(:admin)
+  end
+
+  def publish?
+    @record.user == @user
   end
   
   private
