@@ -1,5 +1,6 @@
 class Lesson < ApplicationRecord
   validates :title, :content, :course, presence: true
+  validates :title, uniqueness: true, length: { maximum: 70 }
   
   belongs_to :course, counter_cache: true
   

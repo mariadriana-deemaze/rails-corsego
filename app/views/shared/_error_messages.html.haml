@@ -1,9 +1,9 @@
 - if !object.errors.nil? && object.errors.any?
-    .banner.banner-danger
-        %p
+    .notice.notice-danger
+        %p.text-red-500
             %b  
                 = pluralize(object.errors.count, "error") 
         %ul
-            = object.errors.full_messages.each do |msg|
+            - object.errors.full_messages.each do |msg|
                 %li
                     = msg

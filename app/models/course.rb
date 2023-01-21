@@ -12,7 +12,10 @@ class Course < ApplicationRecord
 
     has_one_attached :image
 
-    validates :image, attached: true, 
+    validates :title, uniqueness: true, length: { maximum: 70 }
+    validates :price, numericality: { greater_than_or_equal_to: 0 }
+
+    validates :image, presence: true, 
     content_type: ['image/png', 'image/jpg', 'image/jpeg'], 
     size: { less_than: 500.kilobytes , message: 'size should be under 500 kilobytes' }
 
