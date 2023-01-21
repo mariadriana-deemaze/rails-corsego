@@ -33,8 +33,10 @@
           - else
             %li
               = render "lessons/preview", lesson: lesson
-      
-      - if @lesson.video_thumbnail.attached?
-        = image_tag @lesson.video_thumbnail
-        %video(controls="true" poster="#{url_for @lesson.video_thumbnail}" width="100%" preload="metadata")
-          %source{src: rails_blob_url(@lesson.video), type:"#{@lesson.video.content_type}"}
+      - if @lesson.video.attached?
+        - if @lesson.video_thumbnail.attached?
+          %video(controls="true" poster="#{url_for @lesson.video_thumbnail}" width="100%" preload="metadata")
+            %source{src: rails_blob_url(@lesson.video), type:"#{@lesson.video.content_type}"}
+        - else
+          %video(controls="true" width="100%" preload="metadata")
+            %source{src: rails_blob_url(@lesson.video), type:"#{@lesson.video.content_type}"}

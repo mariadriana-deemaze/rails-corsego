@@ -3,6 +3,16 @@
   = f.input :title, input_html: { autocomplete: 'off' }
   = f.label :content
   = f.rich_text_area :content
-  = f.input :video
   = f.input :video_thumbnail
+  .flex.flex-col
+    - if @lesson.video.attached?
+      = @lesson.video.filename
+    = f.input :video
+  .flex.flex-col
+    - if @lesson.video_thumbnail.attached?
+      = @lesson.video_thumbnail.filename
+
+  = link_to 'Remove video and thumbnail', delete_video_course_lesson_path(@course, @lesson), data: {turbo_method: :delete }, class: "danger-button"
   = f.button :submit
+
+

@@ -1,7 +1,6 @@
 class LessonsController < ApplicationController
-  before_action :set_course,           only: %i[ show new create edit update destroy ]
-  before_action :set_lesson,           only: %i[ show edit update destroy ]
-  before_action :authorization_policy, only: %i[ show edit update destroy ]
+  before_action :set_lesson,           only: %i[ show edit update destroy delete_video]
+  before_action :authorization_policy, only: %i[ show edit update destroy delete_video]
 
   def index
     @lessons = Lesson.all
@@ -56,13 +55,16 @@ class LessonsController < ApplicationController
     render body: nil
   end
 
+  def delete_video
+    authorize @lesson, :edit?
+    @lesson.video.purge
+    @lesson.video_thumbnail.purge
+    redirect_to edit_course_lesson_path(@course, @lesson), notice: 'Video successfully deleted!'
+  end
 
   private
-    def set_course
-      @course = Course.friendly.find(params[:course_id])
-    end
-
     def set_lesson
+      @course = Course.friendly.find(params[:course_id])
       @lesson = Lesson.friendly.find(params[:id])
     end
 
