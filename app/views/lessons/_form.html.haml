@@ -1,8 +1,8 @@
 = simple_form_for([@course, @lesson]) do |f|
   = render "shared/error_messages", object: f.object
-  = f.input :title
+  = f.input :title, input_html: { autocomplete: 'off' }
   = f.label :content
   = f.rich_text_area :content
-  %small
-    = f.error :content
+  = f.input :video
+  = f.input :video_thumbnail
   = f.button :submit
