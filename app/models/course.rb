@@ -10,6 +10,12 @@ class Course < ApplicationRecord
 
     has_rich_text :description
 
+    has_one_attached :image
+
+    validates :image, attached: true, 
+    content_type: ['image/png', 'image/jpg', 'image/jpeg'], 
+    size: { less_than: 500.kilobytes , message: 'size should be under 500 kilobytes' }
+
     scope :latest,      -> { limit(3).order(created_at: :desc) }
     scope :top_rated,   -> { limit(3).order(average_rating: :desc, created_at: :desc) }
     scope :popular,     -> { limit(3).order(enrollments_count: :desc, created_at: :desc) }

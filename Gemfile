@@ -82,6 +82,9 @@ gem "groupdate"
 # record sorting lib
 gem 'ranked-model'
 
+#validate image and file uploads
+gem 'active_storage_validations'
+
 # alert production exception
 gem 'exception_notification'
 

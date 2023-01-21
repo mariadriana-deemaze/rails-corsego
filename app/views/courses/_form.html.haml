@@ -1,5 +1,9 @@
 = simple_form_for @course, local:true, data: { turbo: false } do |f|
   = render "shared/error_messages", object: f.object
+  = f.label :image
+  - if @course.image.attached?
+    = image_tag @course.image, width: "200px"
+  = f.file_field :image 
   = f.input :title
   = f.label :description
   = f.rich_text_area :description
