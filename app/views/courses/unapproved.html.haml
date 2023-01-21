@@ -6,7 +6,7 @@
     .flex.flex-col
       .flex.flex-col.gap-4.sticky.top-16
         %h5 Filter by
-        = search_form_for @ransack_courses , as: :courses_search, url: courses_path, class:"flex flex-col gap-4" do |f|
+        = search_form_for @ransack_courses , as: :courses_search, url: unapproved_courses_path, class:"flex flex-col gap-4" do |f|
           .flex.flex-col
             = f.label :title, class:"form-label"
             = f.search_field :title_cont, placeholder: "Search by title", class:"form-input"
@@ -31,7 +31,7 @@
           /  = f.search_field :price_eq, type: "number", placeholder: "Search by price", class:"form-input"
           .flex.flex-row.gap-2
             = f.submit class:"primary-button w-full"
-            = link_to courses_path, class:"secondary-button" do
+            = link_to unapproved_courses_path, class:"secondary-button" do
               %svg.h-5{"aria-hidden" => "true", :fill => "none", :stroke => "currentColor", "stroke-width" => "1.5", :viewbox => "0 0 24 24", :xmlns => "http://www.w3.org/2000/svg"}
                 %path{:d => "M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 00-3.7-3.7 48.678 48.678 0 00-7.324 0 4.006 4.006 0 00-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3l-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 003.7 3.7 48.656 48.656 0 007.324 0 4.006 4.006 0 003.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3l-3 3", "stroke-linecap" => "round", "stroke-linejoin" => "round"}
     - if @courses.count > 0

@@ -10,12 +10,7 @@
   .mx-auto.w-full.flex.flex-col.gap-4
     = render @course
 
-  .flex.flex-row.justify-between.my-5 
-    %h3 
-      = pluralize(@course.lessons_count, 'Lesson')
-    = "Progress #{number_to_percentage(@course.progress(@course.user), {precision:0})}"
-
-  .flex.flex-col.gap-4
+  .flex.flex-col.gap-4.mt-16
     - if policy(@course).publish?
       - if @course.published?
         = link_to 'Published', unpublish_course_path(@course), data: {turbo_method: :patch}, class: "secondary-button"
@@ -32,16 +27,22 @@
       %button.primary-button{:type => "button"}
         %a{:href => new_course_lesson_path(@course, @lesson)} Add lesson
 
+
+    .flex.flex-row.justify-between.my-5 
+      %h3 
+        = pluralize(@course.lessons_count, 'Lesson')
+      = "Progress #{number_to_percentage(@course.progress(@course.user), {precision:0})}"
+
     - if @lessons.count > 0
       .mx-auto.w-full.flex.flex-col.gap-2
-        = @lessons.each do | lesson |
+        - @lessons.each do | lesson |
           = render "lessons/preview", lesson: lesson
     - else
       %h4 
         No lessons have been added yet...
 
 
-  .flex.flex-col.gap-4
+  .flex.flex-col.gap-4.my-16
     - if @enrollments_with_review.count > 0
       .flex.flex-row.my-5 
         %h3 

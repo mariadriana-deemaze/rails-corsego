@@ -11,6 +11,10 @@ class Lesson < ApplicationRecord
   extend FriendlyId
   friendly_id :title, use: :slugged
 
+  # gem `public_activity`: track lessons activities 
+  include PublicActivity::Model
+  tracked owner: Proc.new{ |controller, model|  PublicActivity.set_controller(@controller) && controller.current_user }
+
   def viewed_by_user(user) 
     self.user_lessons.where(user: user).present?
   end

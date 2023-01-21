@@ -40,7 +40,6 @@ class CoursesController < ApplicationController
     if @course.update(course_params)
       redirect_to course_url(@course)
       flash[:success] = "Course was successfully updated."
-      render :show
     else
       flash[:danger] = @course.errors
       render :edit
@@ -72,7 +71,11 @@ class CoursesController < ApplicationController
   end
   
   def unapproved 
-    @pagy, @courses = pagy(Course.unapproved)
+    # gem 'ransack': apply filters
+    @ransack_courses = Course.unapproved.ransack(params[:courses_search], search_key: :courses_search)
+        
+    # gem 'pagy': paginate collection
+    @pagy, @courses = pagy(@ransack_courses.result)
   end
 
   def approve 

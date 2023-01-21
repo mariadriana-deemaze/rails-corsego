@@ -2,47 +2,49 @@
     - if @activities.count > 0
         - @activities.each do |activity|
             %ul.border
-                %li
-                    = link_to activity.trackable, activity.trackable
+                - if activity.trackable_type == "Lesson"
+                    %li
+                        = link_to "Go to Lesson", course_lesson_path(activity.trackable.course.id, activity.trackable.id )
+                - else
+                    %li
+                        = link_to "Go to Course", course_path(activity.trackable.id )
                 %li
                     %b 
-                        = "#{activity.trackable_type.humanize}:"
-                    = activity.trackable_type
-                %li
-                    %b 
-                        = "#{activity.trackable_id.to_s.humanize}:"
+                        Trackable id
                     = activity.trackable_id
                 %li
                     %b 
-                        = "#{activity.owner_id.to_s.humanize}:"
-                    = activity.owner_id
+                        Trackable type
+                    = model_label(activity.trackable_type)
                 %li
                     %b 
-                        = "#{activity.parameters.to_s.humanize}:"
+                        Parameters
                     = activity.parameters
                 %li
                     %b 
-                        = "#{activity.key.to_s.humanize}:"
+                        Activity key
                     = activity.key
+                    = crud_label(activity.key.match(/\.(.*)/)[1])
                 %li
                     %b 
-                        = "#{activity.recipient_type.to_s.humanize}:"
+                        Activity type
                     = activity.recipient_type
                 %li 
                     %b 
-                        = "#{activity.owner_id.to_s.humanize}:"
+                        User id
                     = activity.owner_id
                 %li 
                     %b 
-                        = "#{activity.owner.to_s.humanize}:"
+                        User
                     = activity.owner
                 %li
                     %b 
-                        = "#{activity.created_at.to_s.humanize}:"
-                    = activity.created_at
+                        Created at
+                    = time_ago_in_words(activity.created_at)
+
                 %li
                     %b 
-                        = "#{activity.updated_at.to_s.humanize}:"
-                    = activity.updated_at
+                        Updated at
+                    = activity.updated_at.strftime('%F')
     - else
         %p Nothing to see here
