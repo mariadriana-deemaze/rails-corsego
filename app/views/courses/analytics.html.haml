@@ -1,0 +1,25 @@
+= provide(:title, "Analytics for #{@course.title.downcase} course")
+
+.breadcrumbs
+  .container
+    = link_to 'Courses', courses_path
+    \/
+    = link_to @course.title, course_path(@course)  
+    \/
+    = link_to analytics_course_path(@course)
+
+%h4.text-center 
+  Analtycs for #{@course.title}
+
+.container.flex.flex-col.gap-4
+  .flex.flex-col.gap-4
+    %h3 Enrollments per day, quantity
+    = line_chart @course.enrollments.group_by_day(:created_at).count
+
+  .flex.flex-col.gap-4
+    %h3 Enrollments per day, revenue
+    = line_chart @course.enrollments.group_by_day(:created_at).sum(:price)
+  
+  .flex.flex-col.gap-4
+    %h3 Impressions per lesson (how many times the lesson was opened)
+    = bar_chart @course.user_lessons.joins(:lesson).group(:'lessons.title').sum(:impressions)

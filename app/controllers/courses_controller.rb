@@ -1,6 +1,7 @@
 class CoursesController < ApplicationController
-  before_action :set_course,           only: %i[ show edit update destroy approve unapprove publish unpublish]
-  before_action :authorization_policy, only: %i[ show edit destroy ]
+  skip_before_action :authenticate_user!,   only: %i[ show ]
+  before_action      :set_course,           only: %i[ show edit update destroy approve unapprove publish unpublish analytics ]
+  before_action      :authorization_policy, only: %i[ show edit destroy ]
 
   def index
     # gem 'ransack': apply filters
@@ -54,6 +55,11 @@ class CoursesController < ApplicationController
       redirect_to @course
       flash[:success] = "Course has enrollments. Cannot be destroyed."
     end
+  end
+
+  # owner
+  def analytics
+    authorize @course, :owner?
   end
 
   # student

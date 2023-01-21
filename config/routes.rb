@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     get :purchased, :pending_review, :created, :unapproved, on: :collection
 
     member do
+      get :analytics
       patch :approve
       patch :unapprove
       patch :publish

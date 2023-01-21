@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
     before_action :authenticate_user!
     before_action :set_global_variables, if: :user_signed_in?
-    after_action :user_activity
+    after_action :user_activity, if: :user_signed_in?
 
     # gem 'public_activity': track courses activities to current_user
     include PublicActivity::StoreController 

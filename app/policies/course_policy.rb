@@ -4,7 +4,11 @@ class CoursePolicy < ApplicationPolicy
       scope.all
     end
   end
-  
+
+  def owner?
+    @user.present? && @record.user == @user 
+  end
+
   def new? 
     self.has_access?
   end
@@ -13,7 +17,6 @@ class CoursePolicy < ApplicationPolicy
     visible = @record.published && @record.approved
     isAdmin = @user.present? && @user.has_role?(:admin)
     purchased = @user.present? && @record.bought(@user)
-
     visible || isAdmin || purchased
   end
 
@@ -26,7 +29,7 @@ class CoursePolicy < ApplicationPolicy
   end
   
   def destroy? 
-    self.has_access?
+    self.has_access? && @record.enrollments.none?
   end
   
   def create? 
@@ -34,13 +37,13 @@ class CoursePolicy < ApplicationPolicy
   end
 
   def approve?
-    @user.has_role?(:admin)
+    @user.present? && @user.has_role?(:admin)
   end
 
   def publish?
-    @record.user == @user
+    @user.present? && self.has_access?
   end
-  
+
   private
 
   def has_access?

@@ -13,7 +13,7 @@ module CoursesHelper
                 link_to "Free", new_course_enrollment_path(course), class: "primary-button"
             end
         else
-            link_to "Check price", course_path(course), class: "primary-button"
+            link_to "Check price", new_course_enrollment_path(course), class: "primary-button"
          end
     end
 

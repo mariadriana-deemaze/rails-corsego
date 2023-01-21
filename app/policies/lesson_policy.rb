@@ -14,7 +14,7 @@ class LessonPolicy < ApplicationPolicy
   end
 
   def edit? 
-    self.has_access?
+    @user.present? && self.has_access?
   end
   
   def update? 

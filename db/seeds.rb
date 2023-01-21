@@ -32,8 +32,10 @@ admin = User.create!( email: 'mariaadriana15@gmail.com',
         short_description: Faker::Quote.famous_last_words,
         language: Faker::ProgrammingLanguage.name,
         level: ["Beginner", "Intermediate", "Advanced"].sample,
-        price: Faker::Number.between(from: 10, to:200),
-        user_id: User.all.ids.sample
+        price: Faker::Number.between(from: 0, to:200),
+        user_id: User.all.ids.sample,
+        published: true,
+        approved: true
         }])
       end
       
