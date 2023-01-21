@@ -20,7 +20,9 @@ Rails.application.routes.draw do
       patch :unpublish
     end
     
-    resources :lessons
+    resources :lessons do
+      put :sort
+    end
     resources :enrollments, only: [:new, :create]
   end
   

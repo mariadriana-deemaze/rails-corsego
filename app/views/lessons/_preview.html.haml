@@ -10,4 +10,5 @@
   .flex.flex-col.gap-2.flex-grow
     .flex.flex-row
       %b
+        = "#{lesson.row_order_rank + 1}."
         = link_to lesson.title, course_lesson_path(@course, lesson)

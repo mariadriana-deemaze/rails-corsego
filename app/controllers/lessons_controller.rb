@@ -9,7 +9,7 @@ class LessonsController < ApplicationController
 
   def show
     current_user.mark_as_viewed(@lesson)
-    @lessons = @course.lessons
+    @lessons = @course.lessons.rank(:row_order)
   end
 
   def new
@@ -48,6 +48,15 @@ class LessonsController < ApplicationController
     flash.now[:success] = "Lesson was successfully destroyed."
   end
 
+  def sort
+    @course = Course.friendly.find(params[:course_id])
+    lesson = Lesson.friendly.find(params[:lesson_id])
+    authorize lesson, :edit?
+    lesson.update(lesson_params)
+    render body: nil
+  end
+
+
   private
     def set_course
       @course = Course.friendly.find(params[:course_id])
@@ -62,6 +71,6 @@ class LessonsController < ApplicationController
     end
 
     def lesson_params
-      params.require(:lesson).permit(:title, :content, :course_id)
+      params.require(:lesson).permit(:title, :content, :course_id, :row_order_position)
     end
 end

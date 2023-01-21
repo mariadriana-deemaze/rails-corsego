@@ -223,6 +223,8 @@ GEM
       thor (~> 1.0)
       zeitwerk (~> 2.5)
     rake (13.0.6)
+    ranked-model (0.4.8)
+      activerecord (>= 4.2)
     ransack (3.2.1)
       activerecord (>= 6.1.5)
       activesupport (>= 6.1.5)
@@ -351,6 +353,7 @@ DEPENDENCIES
   rails (~> 7.0.4)
   rails-erd
   rails_live_reload
+  ranked-model
   ransack
   rolify
   rspec-rails

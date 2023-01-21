@@ -34,9 +34,9 @@
       = "Progress #{number_to_percentage(@course.progress(@course.user), {precision:0})}"
 
     - if @lessons.count > 0
-      .mx-auto.w-full.flex.flex-col.gap-2
+      .mx-auto.w-full.flex.flex-col.gap-2.lesson-sortable
         - @lessons.each do | lesson |
-          = render "lessons/preview", lesson: lesson
+          = render 'lessons/preview', lesson: lesson
     - else
       %h4 
         No lessons have been added yet...

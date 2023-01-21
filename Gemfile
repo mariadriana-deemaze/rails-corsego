@@ -79,6 +79,9 @@ gem "chartkick"
 # agreggate data utils
 gem "groupdate"
 
+# record sorting lib
+gem 'ranked-model'
+
 # alert production exception
 gem 'exception_notification'
 

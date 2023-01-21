@@ -4,5 +4,5 @@ import 'controllers';
 import 'trix';
 import '@rails/actiontext';
 import 'flowbite';
-import "chartkick"
-import "Chart.bundle"
+import "chartkick";
+import "Chart.bundle";
