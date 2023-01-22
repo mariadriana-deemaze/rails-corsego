@@ -9,7 +9,6 @@
       %p.text-sm.tracking-tight.text-gray-900.dark:text-white 
         Signed up
         = time_ago_in_words(user.created_at)
-      
       %p.text-sm.tracking-tight.text-gray-900.dark:text-white
         = 'sign_in_count'.humanize
         = user.sign_in_count

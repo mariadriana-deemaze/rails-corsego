@@ -9,9 +9,12 @@ class LessonsController < ApplicationController
   def show
     current_user.mark_as_viewed(@lesson)
     @lessons = @course.lessons.rank(:row_order)
+    @comment = Comment.new
+    @comments = @lesson.comments.order(created_at: :desc)
   end
 
   def new
+    @course = Course.friendly.find(params[:course_id])
     @lesson = Lesson.new
   end
 
@@ -19,6 +22,7 @@ class LessonsController < ApplicationController
   end
 
   def create
+    @course = Course.friendly.find(params[:course_id])
     @lesson = Lesson.new(lesson_params)
     @lesson.course_id = @course.id
 

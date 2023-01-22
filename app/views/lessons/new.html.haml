@@ -8,5 +8,5 @@
 
 .container
   %h1.font-bold.text-4xl New lesson
-  = render "form", lesson: @lesson
+  = render "form"
   = link_to 'Back to course', course_path(@course), class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"

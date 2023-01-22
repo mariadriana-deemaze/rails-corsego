@@ -6,6 +6,7 @@ class Lesson < ApplicationRecord
   belongs_to :course, counter_cache: true
   
   has_many :user_lessons, dependent: :destroy
+  has_many :comments, dependent: :nullify
 
   has_rich_text :content
 

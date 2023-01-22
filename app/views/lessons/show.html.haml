@@ -40,3 +40,16 @@
         - else
           %video(controls="true" width="100%" preload="metadata")
             %source{src: rails_blob_url(@lesson.video), type:"#{@lesson.video.content_type}"}
+  .flex.flex-col.gap-4
+    New comment:
+    = render 'lessons/comments/form'
+    %hr
+    %h4 All comments
+    = @lesson.comments_count
+    
+    - @comments.each do |comment|
+      %ul.border-b.border-gray-200.py-4.last:border-0
+        %li
+          = render 'lessons/comments/comment', comment: comment
+      %p
+    %hr

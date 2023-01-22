@@ -20,7 +20,8 @@ Rails.application.routes.draw do
       patch :unpublish
     end
     
-    resources :lessons do
+    resources :lessons, except: [:index] do
+      resources :comments, except: [:index]
       put :sort
       member do
         delete :delete_video

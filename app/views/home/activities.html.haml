@@ -5,9 +5,14 @@
                 - if activity.trackable_type == "Lesson"
                     %li
                         = link_to "Go to Lesson", course_lesson_path(activity.trackable.course.id, activity.trackable.id )
-                - else
+                - elsif activity.trackable_type == "Course"
                     %li
                         = link_to "Go to Course", course_path(activity.trackable.id )
+                - else activity.trackable_type == "Comment"
+                    - if Comment.where(id: activity.trackable_id).any?
+                        = link_to activity.trackable.content, course_lesson_path(activity.trackable.lesson.course, activity.trackable.lesson)
+                    - else
+                        Comment was deleted        
                 %li
                     %b 
                         Trackable id

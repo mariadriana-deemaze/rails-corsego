@@ -26,17 +26,43 @@ admin = User.create!( email: 'mariaadriana15@gmail.com',
     end
     
     30.times do
-      Course.create!([{
-        title: Faker::Educator.course_name,
-        description: Faker::TvShows::GameOfThrones.quote,
-        short_description: Faker::Quote.famous_last_words,
-        language: Faker::ProgrammingLanguage.name,
-        level: ["Beginner", "Intermediate", "Advanced"].sample,
-        price: Faker::Number.between(from: 0, to:200),
-        user_id: User.all.ids.sample,
-        published: true,
-        approved: true
-        }])
-      end
+      paid_course = Course.create(
+          title: Faker::Educator.course_name,
+          description: Faker::TvShows::GameOfThrones.quote,
+          short_description: Faker::Quote.famous_last_words,
+          language: Faker::ProgrammingLanguage.name,
+          level: ["Beginner", "Intermediate", "Advanced"].sample,
+          price: Faker::Number.between(from: 0, to:200),
+          user_id: User.all.ids.sample,
+          published: true,
+          approved: true
+      )
+      paid_course.image.attach(
+        io:  File.open(File.join(Rails.root,'app/assets/images/Oprah-You-Get-A.jpeg')),
+        filename: 'Oprah-You-Get-A.jpeg'
+      )
+
+      paid_course.save
+    end
+    
+    # free course
+    free_course = Course.create(
+      title: Faker::Educator.course_name,
+      description: Faker::TvShows::GameOfThrones.quote,
+      short_description: Faker::Quote.famous_last_words,
+      language: Faker::ProgrammingLanguage.name,
+      level: ["Beginner", "Intermediate", "Advanced"].sample,
+      price: 0,
+      user_id: User.all.ids.sample,
+      published: true,
+      approved: true
+    )
+
+    free_course.image.attach(
+      io:  File.open(File.join(Rails.root,'app/assets/images/Oprah-You-Get-A.jpeg')),
+      filename: 'Oprah-You-Get-A.jpeg'
+    )
+
+    free_course.save
       
 PublicActivity.enabled = true
