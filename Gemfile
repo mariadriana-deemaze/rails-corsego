@@ -101,6 +101,9 @@ group :development, :test do
 end
 
 group :development do
+  # save mailers previews
+  gem "letter_opener"
+  
   # visualize your schema relationships
   gem 'rails-erd'
   # Use console on exceptions pages [https://github.com/rails/web-console]

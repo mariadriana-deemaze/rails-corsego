@@ -29,6 +29,8 @@ class EnrollmentsController < ApplicationController
       @enrollment = current_user.enroll_to_course(@course)
       flash[:success] = "Success! Enjoy your new course."
       redirect_to course_path(@course)
+      EnrollmentMailer.student_enrollment(@enrollment).deliver_later
+      EnrollmentMailer.teacher_enrollment(@enrollment).deliver_later
     end
   end
 

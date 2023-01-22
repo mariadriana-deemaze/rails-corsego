@@ -1,0 +1,20 @@
+You have enrolled to the course
+= link_to @enrollment.course, @enrollment.course
+.flex.flex-row
+Enrollment date:
+= @enrollment.created_at
+.flex.flex-row
+Enrollment ID: 
+= @enrollment.slug
+.flex.flex-row
+Course price:
+= @enrollment.course.price
+.flex.flex-row
+Price paid:
+= @enrollment.price
+.flex.flex-row
+After completing the course, you will be entitled to a Certificate of Completion.
+.flex.flex-row
+Regards, 
+.flex.flex-row
+= link_to 'The Corsego team', root_url
