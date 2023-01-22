@@ -6,3 +6,9 @@ import '@rails/actiontext';
 import 'flowbite';
 import "chartkick";
 import "Chart.bundle";
+
+import 'jquery';
+
+$(function(){
+    console.log("Hey!")
+})
