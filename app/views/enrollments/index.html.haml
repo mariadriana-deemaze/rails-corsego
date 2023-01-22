@@ -41,6 +41,9 @@
               Progress
           %th.px-6.py-3{:scope => "col"}
             .flex.items-center
+              Certificate
+          %th.px-6.py-3{:scope => "col"}
+            .flex.items-center
               Price
           %th.px-6.py-3{:scope => "col"}
             .flex.items-center
@@ -76,6 +79,8 @@
                   = enrollment.review
               %th.px-6.py-4.font-medium.text-gray-900.whitespace-nowrap.dark:text-white{:scope => "row"}
                 = number_to_percentage(enrollment.course.progress(enrollment.user), precision: 0)
+              %th.px-6.py-4.font-medium.text-gray-900.whitespace-nowrap.dark:text-white{:scope => "row"}
+                = link_to 'Certificate', certificate_enrollment_path(enrollment, format: :pdf)
               %th.px-6.py-4.font-medium.text-gray-900.whitespace-nowrap.dark:text-white{:scope => "row"}
                 = format_price(enrollment.price)
               %th.px-6.py-4.font-medium.text-gray-900.whitespace-nowrap.dark:text-white{:scope => "row"}

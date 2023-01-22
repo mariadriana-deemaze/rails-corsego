@@ -11,6 +11,7 @@
     = render @course
 
   .flex.flex-col.gap-4.mt-16
+    = certificate_button(@course)
     - if policy(@course).publish?
       - if @course.published?
         = link_to 'Published', unpublish_course_path(@course), data: {turbo_method: :patch}, class: "secondary-button"

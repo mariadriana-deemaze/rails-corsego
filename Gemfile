@@ -85,6 +85,10 @@ gem 'ranked-model'
 #validate image and file uploads
 gem 'active_storage_validations'
 
+#PDF gen
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
+
 # alert production exception
 gem 'exception_notification'
 
