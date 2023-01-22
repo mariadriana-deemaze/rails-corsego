@@ -41,6 +41,12 @@
       %h4 
         No lessons have been added yet...
 
+  - Course.all.where.not(id: @course.id).each do |course|
+    - unless @course.tags.pluck(:id).intersection(course.tags.pluck(:id)).count.zero?
+      .flex.flex-col 
+        %h4 Similar Courses
+        .flex.flex-row.gap.4
+          = render 'courses/course', course: course
 
   .flex.flex-col.gap-4.my-16
     - if @enrollments_with_review.count > 0
@@ -53,3 +59,4 @@
     - else
       %h4 
         This course has no reviews
+

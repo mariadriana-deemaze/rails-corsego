@@ -36,6 +36,12 @@
 
       %h3
         = link_to course.title, course_path(course), class: "flex flex-col gap-1"
+
+      - if course.tags.any?
+        .card-footer
+          - course.tags.each do |tag|
+            .badge.badge-info
+              = tag.name
       
       - if course.image.attached?
         = link_to course_path(course) do
