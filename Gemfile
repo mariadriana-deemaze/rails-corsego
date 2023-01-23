@@ -85,6 +85,9 @@ gem 'ranked-model'
 #validate image and file uploads
 gem 'active_storage_validations'
 
+# self explanatory
+gem 'sitemap_generator'
+
 #PDF gen
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
