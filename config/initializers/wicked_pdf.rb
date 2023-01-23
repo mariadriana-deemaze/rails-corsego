@@ -9,9 +9,10 @@
 # https://github.com/mileszs/wicked_pdf/blob/master/README.md
 
 WickedPdf.config = {
-  layout: "pdf.html.haml",
+  layout: 'pdf',
   orientation: "Landscape",
   lowquality: true,
   zoom: 1,
-  dpi: 75
+  dpi: 75,
+  formats: [:html]
 }
