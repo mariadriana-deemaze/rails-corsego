@@ -1,0 +1,5 @@
+.container.h-full.w-full.flex.flex-col.justify-center.items-center.gap-4
+    %h4 
+        There was an error with your purchase
+    = @course.title  
+    = link_to "Try again", checkout_create_path({course: @course}), class:"link", data: { turbo_method: "post" }

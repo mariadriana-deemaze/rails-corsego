@@ -1,0 +1,4 @@
+.container.h-full.w-full.flex.flex-col.justify-center.items-center.gap-4
+    %h4 
+        = "Successfully enrolled to #{@course.title}"
+    = link_to "Start course", course_path(@course), class:"link"

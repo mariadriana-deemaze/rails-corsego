@@ -6,13 +6,13 @@ class EnrollmentsController < ApplicationController
   def index
     # gem 'pagy': paginate collection
     @pagy, @enrollments = pagy(Enrollment.all)
-
+    
     authorize @enrollments
   end
-
+  
   def show
   end
-
+  
   def new
     @enrollment = Enrollment.new
   end
@@ -22,16 +22,6 @@ class EnrollmentsController < ApplicationController
   end
 
   def create
-    if @course.price > 0
-      flash[:alert] = "You cannot access paid courses yet."
-      redirect_to new_course_enrollment_path(@course)
-    else
-      @enrollment = current_user.enroll_to_course(@course)
-      flash[:success] = "Success! Enjoy your new course."
-      redirect_to course_path(@course)
-      EnrollmentMailer.student_enrollment(@enrollment).deliver_later
-      EnrollmentMailer.teacher_enrollment(@enrollment).deliver_later
-    end
   end
 
   def update
@@ -66,8 +56,8 @@ class EnrollmentsController < ApplicationController
     end
   end
 
-
   private
+
   def set_course
     @course = Course.friendly.find(params[:course_id])
   end

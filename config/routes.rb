@@ -44,5 +44,10 @@ Rails.application.routes.draw do
     get 'enrollments_per_day'
   end
 
+  post "webhooks", to: "webhooks#create"
+  post "checkout/create", to: "checkouts#create"
+  get "checkout/success", to: "checkouts#success"
+  get "checkout/cancel", to: "checkouts#cancel"
+
   get 'static_pages/privacy_policy'
 end

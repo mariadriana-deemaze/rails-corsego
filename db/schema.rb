@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_22_171727) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_24_090836) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -104,6 +104,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_22_171727) do
     t.integer "lessons_count", default: 0, null: false
     t.boolean "published", default: false
     t.boolean "approved", default: false
+    t.string "stripe_product_id"
+    t.string "stripe_price_id"
+    t.string "currency", default: "eur"
     t.index ["slug"], name: "index_courses_on_slug", unique: true
     t.index ["user_id"], name: "index_courses_on_user_id"
   end
@@ -194,6 +197,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_22_171727) do
     t.integer "enrollments_count", default: 0, null: false
     t.integer "comments_count", default: 0, null: false
     t.integer "user_lessons_count", default: 0, null: false
+    t.string "stripe_customer_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
