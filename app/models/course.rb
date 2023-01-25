@@ -30,7 +30,6 @@ class Course < ApplicationRecord
     scope :unpublished, -> { where(published: false) }
     scope :unapproved,  -> { where(approved: false) }
 
-    
     LANGUAGES = [:"English", :"Portuguese"]
     LEVELS = [:"Beginner", :"Intermediate", :"Advanced"]
     
@@ -46,9 +45,8 @@ class Course < ApplicationRecord
     # This is your test secret API key.
     Stripe.api_key = Rails.application.credentials[:stripe][:private_key]
 
-    # gem `stripe`: create stripe product after create
-    after_create :create_stripe_product
-    after_save :update_stripe_product
+    # gem `stripe`: create stripe product after save if it approved and published
+    after_save :create_update_stripe_product
     
     def to_s
         title
@@ -76,35 +74,35 @@ class Course < ApplicationRecord
         price * 100 
     end
 
-    def create_stripe_product 
-        image_path = root_url +  Rails.application.routes.url_helpers.rails_blob_path(self.image, only_path: true)
-        stripe_product = Stripe::Product.create(name: title, images:[image_path])
-        stripe_price = Stripe::Price.create(product: stripe_product, unit_amount: price_as_cents(self.price), currency: self.currency)
-        update(stripe_product_id: stripe_product.id, stripe_price_id: stripe_price.id)
-    end
+    def create_update_stripe_product 
+        if self.stripe_product_id.present?
+            if self.approved && self.published 
 
-    def update_stripe_product 
-        image_path = root_url +  Rails.application.routes.url_helpers.rails_blob_path(self.image, only_path: true)
+                current_price = Stripe::Price.retrieve(self.stripe_price_id)[:unit_amount]/100 
 
-        Stripe::Product.update(
-            self.stripe_product_id,
-            { name: self.title, images:[image_path] },
-        )
+                unless self.price == current_price
+                    # disable old price
+                    Stripe::Price.update(
+                        self.stripe_price_id,
+                        { active: false },
+                    )
 
-        current_price = Stripe::Price.retrieve(self.stripe_price_id)[:unit_amount]/100 
-        
-        unless self.price == current_price
-            # disable old
-            Stripe::Price.update(
-                self.stripe_price_id,
-                { active: false },
-            )
-
-            #create new
-            stripe_product = Stripe::Product.retrieve(self.stripe_product_id)
-            stripe_price = Stripe::Price.create(product: stripe_product, unit_amount: price_as_cents(self.price), currency: self.currency)
-            update(stripe_price_id: stripe_price.id)
-            save
+                    # create new price
+                    stripe_price = Stripe::Price.create(product: self.stripe_product_id, unit_amount: price_as_cents(self.price), currency: self.currency)
+                    update(stripe_price_id: stripe_price.id)
+                end
+                
+                Stripe::Product.update(self.stripe_product_id, { active: true, name: self.title })
+            else
+                Stripe::Product.update(self.stripe_product_id, { active: false, name: self.title })
+            end
+        else
+            if self.approved && self.published
+                # create product
+                stripe_product = Stripe::Product.create(name: self.title)
+                stripe_price   = Stripe::Price.create(product: stripe_product, unit_amount: price_as_cents(self.price), currency: self.currency)
+                update(stripe_product_id: stripe_product.id, stripe_price_id: stripe_price.id)
+            end
         end
     end
 

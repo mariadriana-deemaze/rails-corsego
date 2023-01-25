@@ -35,7 +35,7 @@ end
       price: Faker::Number.between(from: 0, to:200),
       user_id: User.all.ids.sample,
       published: true,
-      approved: true
+      approved: false
   )
   
   paid_course.image.attach(
@@ -56,7 +56,7 @@ free_course = Course.create(
   price: 0,
   user_id: User.all.ids.sample,
   published: true,
-  approved: true
+  approved: false
 )
 
 free_course.image.attach(
