@@ -103,6 +103,7 @@ group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
   gem 'rspec-rails'
   gem 'shoulda-matchers'
+  gem 'simplecov', require: false
   gem 'factory_bot_rails', require: false
 end
 

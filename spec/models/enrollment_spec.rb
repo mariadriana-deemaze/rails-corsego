@@ -3,9 +3,10 @@
 require 'rails_helper'
 
 RSpec.describe Enrollment, type: :model do
-  subject { FactoryBot.build(:enrollment) }
+  subject(:enrollment) { build(:enrollment) }
   
   describe "Validations" do 
+    it { expect(enrollment).to be_valid }
     it { should validate_presence_of(:user) }
     it { should validate_presence_of(:course) }
   end
