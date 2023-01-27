@@ -1,10 +1,11 @@
-%h2 Resend unlock instructions
-= simple_form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f|
-  = render "shared/error_messages", object: f.object
-  =# f.full_error :unlock_token
-  = f.input :email,
-    required: true,
-    autofocus: true,
-    input_html: { autocomplete: "email" }
-  = f.button :submit, "Resend unlock instructions"
-= render "devise/shared/links"
+.container
+  %h2 Resend unlock instructions
+  = simple_form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f|
+    = render "shared/error_messages", object: f.object
+    =# f.full_error :unlock_token
+    = f.input :email,
+      required: true,
+      autofocus: true,
+      input_html: { autocomplete: "email" }
+    = f.button :submit, "Resend unlock instructions"
+  = render "devise/shared/links"
