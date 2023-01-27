@@ -6,8 +6,9 @@
     \/
     = link_to @course.title, course_path(@course)
 
-.container
-  %h1.font-bold.text-4xl Editing course
+.container.flex.flex-col.gap-6.mt-10.mb-5
+  .flex.flex-col.gap-2
+    %h1.font-bold.text-4xl Editing course
+    = link_to "← Back to courses", courses_path, class: "link"
+  
   = render "form", course: @course
-  = link_to "Show this course", @course, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"
-  = link_to "Back to courses", courses_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"

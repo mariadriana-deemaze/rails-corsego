@@ -1,5 +1,5 @@
-.w-full.max-h-96.max-w-sm.border.border-gray-200.bg-white.rounded-lg.shadow-md.dark:bg-gray-800.dark:border-gray-700.overflow-hidden.overflow-y-auto 
-  .flex.flex-col.justify-between.h-full.group
+.w-full.max-h-96.border.border-gray-200.bg-white.rounded-lg.shadow-md.dark:bg-gray-800.dark:border-gray-700.overflow-hidden.overflow-y-auto 
+  .flex.flex-col.justify-between.h-full{:class => policy(course).edit? ? "group" : ""}
     .flex.flex-col.relative.w-full.h-40
       / default
       .absolute.flex.flex-col.h-full.w-full.transition-opacity.duration-500.group-hover:opacity-0
@@ -59,7 +59,7 @@
             = image_tag "../../assets/images/Oprah-You-Get-A.jpeg", class: "bg-cover"
 
     / body 
-    .flex.flex-col.relative.p-3  
+    .flex.flex-col.relative.p-3.h-40  
       .flex.flex-row.gap-6.items-center
         .flex.flex-row.items-center.gap-2
           %span.h-4.w-4
@@ -79,20 +79,17 @@
               %path{:d => "M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25", "stroke-linecap" => "round", "stroke-linejoin" => "round"}
           = course.lessons_count
 
-      %h5.font-semibold.mt-2
-        = link_to course.title, new_course_enrollment_path(course), class: "flex flex-col gap-1 line-clamp-2"
+      .flex.flex-col.gap-2
+        %h5.font-semibold.mt-2
+          = link_to course.title, new_course_enrollment_path(course), class: "flex flex-col gap-1 line-clamp-2"
 
-      - if course.tags.any?
-        .card-footer
+        .overflow-hidden.max-h-40
+          %p.line-clamp-2.text-xs
+            = course.short_description
+
+        - if course.tags.any?
           - course.tags.each do |tag|
-            .badge.badge-info
-              = tag.name
-
-      .overflow-hidden.max-h-40
-        %p.line-clamp-3
-          = course.short_description
-
-      = review_button(course)
+            = tag.name
       
     .flex.items-center.justify-between.w-full.border-t.border-gray-300.p-5
       %h3

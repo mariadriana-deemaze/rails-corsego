@@ -58,7 +58,7 @@
 }
 
 .badge-min {
-  @apply mr-2 px-2.5 py-0.5 rounded text-sm font-medium h-6
+  @apply flex items-center mr-2 px-2.5 py-0.5 rounded text-sm font-medium h-6
 }
 
 .badge-red{

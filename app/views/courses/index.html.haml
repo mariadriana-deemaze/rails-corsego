@@ -1,11 +1,25 @@
 = provide(:title, "Show courses")
 
-.container
-  %h1.font-bold.text-4xl.mb-10 #{@courses.length} courses
-  .w-full.grid.gap-8{ class: "grid-cols-[400px_minmax(900px,_1fr)_100px]"}
-    .flex.flex-col
-      .flex.flex-col.gap-4.sticky.top-16
-        %h5 Filter by
+.h-full.flex
+  .w-full.grid{ class: "grid-cols-1 md:grid-cols-[400px,1fr] md:ml-[calc(33.33%_/_2)]"}
+    .flex.flex-col.flex-grow.border-r.border-gray-50.h-full.pr-3.overflow-y-auto
+      .flex.flex-col.gap-4.my-10
+        %h1.font-bold.text-4xl.mb-5 
+          = pluralize(@courses.count, 'course')
+
+        %h6.font-bold
+          Sort by
+        
+        = sort_link(@ransack_courses, :price)
+        = sort_link(@ransack_courses, :average_rating, "Popularity")
+        = sort_link(@ransack_courses, :created_at)
+        = sort_link(@ransack_courses, :enrollments_count)
+        
+        %hr
+
+        %h6.font-bold
+          Filter by
+
         = search_form_for @ransack_courses , as: :courses_search, url: courses_path, class:"flex flex-col gap-4" do |f|
           .flex.flex-col
             = f.label :title, class:"form-label"
@@ -22,21 +36,15 @@
           .flex.flex-col
             = f.label :user_email, class:"form-label"
             = f.search_field :user_email_cont, placeholder: "Search by user", class:"form-input"
-          = sort_link(@ransack_courses, :price)
-          = sort_link(@ransack_courses, :average_rating, "Popularity")
-          = sort_link(@ransack_courses, :created_at)
-          = sort_link(@ransack_courses, :enrollments_count)
-          /.flex.flex-col  
-          /  = f.label :price, class:"form-label"
-          /  = f.search_field :price_eq, type: "number", placeholder: "Search by price", class:"form-input"
+          
           .flex.flex-row.gap-2
             = f.submit class:"primary-button w-full"
             = link_to courses_path, class:"secondary-button" do
               %svg.h-5{"aria-hidden" => "true", :fill => "none", :stroke => "currentColor", "stroke-width" => "1.5", :viewbox => "0 0 24 24", :xmlns => "http://www.w3.org/2000/svg"}
                 %path{:d => "M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 00-3.7-3.7 48.678 48.678 0 00-7.324 0 4.006 4.006 0 00-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3l-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 003.7 3.7 48.656 48.656 0 007.324 0 4.006 4.006 0 003.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3l-3 3", "stroke-linecap" => "round", "stroke-linejoin" => "round"}
     - if @courses.count > 0
-      .overflow-x-auto.flex.flex-col
-        .relative.grid.grid-cols-3.gap-4.min-w-full
+      .overflow-y-auto.flex.flex-col.bg-gray-100.p-5{:class => "md:pr-[calc(33.33%_/_2)]"}
+        .relative.grid.grid-cols-1.md:grid-cols-2.lg:grid-cols-3.gap-4.min-w-full
           - @courses.each do |course|
             = render 'courses/course-card', course: course
 
