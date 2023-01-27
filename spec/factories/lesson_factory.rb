@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :lesson do
     course
-    sequence(:title) { Faker::Book.title }
-    sequence(:content) { Faker::Quote.famous_last_words }
+    title { Faker::Book.title }
+    content {  Faker::Markdown.sandwich }
   end
 end

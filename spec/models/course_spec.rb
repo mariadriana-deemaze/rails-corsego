@@ -19,5 +19,12 @@ RSpec.describe Course, :type => :model do
     it { should have_many(:lessons) }
     it { should belong_to(:user) }
   end
+  
+  describe 'Methods' do
+    it 'Marks lesson as seen by user' do 
+      debugger
+      #subject.bought(user)
+    end 
+  end
 end
   

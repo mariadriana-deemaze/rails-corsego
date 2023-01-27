@@ -2,6 +2,6 @@
 
 FactoryBot.define do
   factory :role do
-    sequence(:name) { ["admin", "student", "teacher"].sample }
+    name { ["admin", "student", "teacher"].sample }
   end
 end
