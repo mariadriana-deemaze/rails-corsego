@@ -1,39 +1,63 @@
 = provide(:title, "Course #{@course.title.downcase}")
 
-.breadcrumbs
+.breadcrumbs{ :class => "!mb-0" }
   .container
     = link_to 'Courses', courses_path
     \/
     = link_to @course.title, course_path(@course)
 
+.flex.flex-col.lg:grid.lg:grid-cols-2.overflow-hidden
+  .flex.flex-col.gap-2.h-96
+    - if @course.image.attached?
+      = link_to course_path(@course) do
+        = image_tag @course.image, class: "w-full h-full bg-cover"
+    - else 
+      = link_to course_path(@course) do
+        = image_tag "../../assets/images/Oprah-You-Get-A.jpeg", class: "w-full h-full bg-cover"
+  .relative.flex.flex-col.h-96.gap-2.justify-center.bg-slate-200
+    .flex.flex-col.px-4.lg:px-20
+      .flex.flex-row.gap-4
+        %h6 
+          = pluralize(@course.lessons_count, 'Lesson')
+        - if @is_enrolled
+          = "Progress #{number_to_percentage(@course.progress(@course.user), {precision:0})}"
+
+      %h3
+        = @course.title
+      = @course.description
+
+    .absolute.w-full.bottom-0.flex.flex-row.gap-4.items-center.border-t.border-gray-300.p-4.lg:px-20
+      - if policy(@course).approve?
+        - if @course.approved?
+          = link_to 'Unapprove', unapprove_course_path(@course), data: {turbo_method: :patch}, class: "secondary-button"
+        - else
+          = link_to 'Approve', approve_course_path(@course), data: {turbo_method: :patch}, class: "secondary-button"
+
+        - if @course.published?
+          = link_to 'Published', unpublish_course_path(@course), data: {turbo_method: :patch}, class: "secondary-button"
+        - else
+          = link_to 'Unpublished', publish_course_path(@course),data: {turbo_method: :patch}, class: "secondary-button"
+      - elsif policy(@course).update?
+        = link_to @course, data: {turbo_method: :delete}, class: "flex flex-col justify-center items-center w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 text-red-500" do
+          Destroy
+      - elsif @is_enrolled
+        = enrollment_button(@course)
+        = certificate_button(@course)
+      - else
+        = enrollment_button(@course)
+
+  
+
+    /.relative.flex.flex-row.gap-4.mt-5.items-center
+    /  = enrollment_button(@course)
+      
+    /  - if policy(@course).edit?
+    /    %button.primary-button{:type => "button"}
+    /      %a{:href => new_course_lesson_path(@course, @lesson)} Add lesson
+      
 .container
-  .mx-auto.w-full.flex.flex-col.gap-4
-    = render @course
-
   .flex.flex-col.gap-4.mt-16
-    = certificate_button(@course)
-    - if policy(@course).publish?
-      - if @course.published?
-        = link_to 'Published', unpublish_course_path(@course), data: {turbo_method: :patch}, class: "secondary-button"
-      - else
-        = link_to 'Unpublished', publish_course_path(@course),data: {turbo_method: :patch}, class: "secondary-button"
-    
-    - if policy(@course).approve?
-      - if @course.approved?
-        = link_to 'Unapprove', unapprove_course_path(@course), data: {turbo_method: :patch}, class: "secondary-button"
-      - else
-        = link_to 'Approve', approve_course_path(@course), data: {turbo_method: :patch}, class: "secondary-button"
-
-    - if policy(@course).edit?
-      %button.primary-button{:type => "button"}
-        %a{:href => new_course_lesson_path(@course, @lesson)} Add lesson
-
-
     .flex.flex-row.justify-between.my-5 
-      %h3 
-        = pluralize(@course.lessons_count, 'Lesson')
-      = "Progress #{number_to_percentage(@course.progress(@course.user), {precision:0})}"
-
     - if @lessons.count > 0
       .mx-auto.w-full.flex.flex-col.gap-2.lesson-sortable
         - @lessons.each do | lesson |

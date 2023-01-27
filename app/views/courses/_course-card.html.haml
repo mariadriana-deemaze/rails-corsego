@@ -1,0 +1,100 @@
+.w-full.max-h-96.max-w-sm.border.border-gray-200.bg-white.rounded-lg.shadow-md.dark:bg-gray-800.dark:border-gray-700.overflow-hidden.overflow-y-auto 
+  .flex.flex-col.justify-between.h-full.group
+    .flex.flex-col.relative.w-full.h-40
+      / default
+      .absolute.flex.flex-col.h-full.w-full.transition-opacity.duration-500.group-hover:opacity-0
+        .flex.flex-row.gap-2.overflow-x-auto.absolute.top-3.scrollbar-hide.w-full
+          %span.badge-min.badge-green.self-start.ml-3
+            = course.level
+
+          - if policy(course).approve?
+            - if course.approved?
+              %span.badge-min.badge-green.block.self-start
+                %svg.h-4.w-4{"aria-hidden" => "true", :fill => "none", :stroke => "currentColor", "stroke-width" => "1.5", :viewbox => "0 0 24 24", :xmlns => "http://www.w3.org/2000/svg"}
+                  %path{:d => "M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z", "stroke-linecap" => "round", "stroke-linejoin" => "round"}
+            - else
+              %span.badge-min.badge-orange.self-start
+                %svg.h-4.w-4{"aria-hidden" => "true", :fill => "none", :stroke => "currentColor", "stroke-width" => "1.5", :viewbox => "0 0 24 24", :xmlns => "http://www.w3.org/2000/svg"}
+                  %path{:d => "M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z", "stroke-linecap" => "round", "stroke-linejoin" => "round"}
+            
+            - if course.published? 
+              %span.badge-min.badge-green.block.self-start
+                %svg.h-4.w-4{"aria-hidden" => "true", :fill => "none", :stroke => "currentColor", "stroke-width" => "1.5", :viewbox => "0 0 24 24", :xmlns => "http://www.w3.org/2000/svg"}
+                  %path{:d => "M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z", "stroke-linecap" => "round", "stroke-linejoin" => "round"}
+                  %path{:d => "M15 12a3 3 0 11-6 0 3 3 0 016 0z", "stroke-linecap" => "round", "stroke-linejoin" => "round"}
+            - else
+              %span.badge-min.badge-red.block.self-start
+                %svg.h-4.w-4{"aria-hidden" => "true", :fill => "none", :stroke => "currentColor", "stroke-width" => "1.5", :viewbox => "0 0 24 24", :xmlns => "http://www.w3.org/2000/svg"}
+                  %path{:d => "M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88", "stroke-linecap" => "round", "stroke-linejoin" => "round"}
+
+        .flex.flex-col.absolute.bottom-0.left-0.p-3.w-full.bg-gradient-to-t.from-black
+          = link_to user_path(course.user) do
+            .flex.flex-row.gap-2.items-center
+              .relative.flex.w-2-h-2
+                - if course.user.online?
+                  .absolute.w-2.h-2.flex.bg-green-400.top-0.right-0.rounded-full
+                - else
+                  .absolute.w-2.h-2.flex.bg-red-700.top-0.right-0.rounded-full
+                = gravatar_for(course.user.email, size: 50, classes:"w-6 h-6 rounded-full border border-white")
+              %p.text-white
+                = course.user.email
+      / hide
+      .absolute.flex.flex-row.justify-end.p-2.h-full.w-full.gap-3.top-0.right-0.opacity-0.transition-opacity.duration-500.group-hover:opacity-100
+        - if policy(course).edit?
+          = link_to edit_course_path(course), class: "flex flex-col justify-center items-center w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200" do
+            %svg.w-4.h-4{fill: "none", stroke: "currentColor", "stroke-width" => "1.5", viewbox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg"}
+              %path{d: "M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10", "stroke-linecap" => "round", "stroke-linejoin" => "round"}
+
+        - if policy(course).destroy?
+          = link_to course, data: {turbo_method: :delete}, class: "flex flex-col justify-center items-center w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 text-red-500" do
+            %svg.w-4.h-4{fill: "none", stroke: "currentColor", "stroke-width" => "1.5", viewbox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg"}
+              %path{d: "M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0", "stroke-linecap" => "round", "stroke-linejoin" => "round"}
+      
+      .flex.flex-col.overflow-hidden.h-full.w-full.bg-gradient-to-t.from-black
+        - if course.image.attached?
+          = link_to new_course_enrollment_path(course) do
+            = image_tag course.image, class: "bg-cover"
+        - else 
+          = link_to new_course_enrollment_path(course) do
+            = image_tag "../../assets/images/Oprah-You-Get-A.jpeg", class: "bg-cover"
+
+    / body 
+    .flex.flex-col.relative.p-3  
+      .flex.flex-row.gap-6.items-center
+        .flex.flex-row.items-center.gap-2
+          %span.h-4.w-4
+            %svg{"aria-hidden" => "true", :fill => "none", :stroke => "currentColor", "stroke-width" => "1.5", :viewbox => "0 0 24 24", :xmlns => "http://www.w3.org/2000/svg"}
+              %path{:d => "M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z", "stroke-linecap" => "round", "stroke-linejoin" => "round"}
+          = course.average_rating
+
+        .flex.flex-row.items-center.gap-2
+          %span.h-4.w-4
+            %svg{"aria-hidden" => "true", :fill => "none", :stroke => "currentColor", "stroke-width" => "1.5", :viewbox => "0 0 24 24", :xmlns => "http://www.w3.org/2000/svg"}
+              %path{:d => "M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z", "stroke-linecap" => "round", "stroke-linejoin" => "round"}
+          = course.enrollments_count
+
+        .flex.flex-row.items-center.gap-2
+          %span.h-4.w-4
+            %svg{"aria-hidden" => "true", :fill => "none", :stroke => "currentColor", "stroke-width" => "1.5", :viewbox => "0 0 24 24", :xmlns => "http://www.w3.org/2000/svg"}
+              %path{:d => "M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25", "stroke-linecap" => "round", "stroke-linejoin" => "round"}
+          = course.lessons_count
+
+      %h5.font-semibold.mt-2
+        = link_to course.title, new_course_enrollment_path(course), class: "flex flex-col gap-1 line-clamp-2"
+
+      - if course.tags.any?
+        .card-footer
+          - course.tags.each do |tag|
+            .badge.badge-info
+              = tag.name
+
+      .overflow-hidden.max-h-40
+        %p.line-clamp-3
+          = course.short_description
+
+      = review_button(course)
+      
+    .flex.items-center.justify-between.w-full.border-t.border-gray-300.p-5
+      %h3
+        = format_price(course.price)
+      = enrollment_button(course)

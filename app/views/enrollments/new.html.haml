@@ -6,8 +6,10 @@
     .bg-white.p-4.sm:p-8.h-full
       .container.grid.mt-10{:class =>"grid-cols-[700px_1fr]"}
         .flex.flex-col.gap-2
+          %h6.uppercase.font-light 
+            Enroll to 
           %h1
-            = "Enroll to #{@course.title}"
+            = @course.title
           = link_to "View course", course_path(@course), class:"link"
           %h5
             Do you want to proceed with this course purchase?
@@ -17,8 +19,6 @@
           .flex.flex-col.gap-2.items-center
             %h3
               = format_price(@course.price)
-            
-            /= render partial: 'enrollments/checkout_button', locals: { session: @checkout_session, title: "Pay now" }
             
             = button_to "Purchase now!", checkout_create_path({course: @course}), class: "primary-button",  data: { turbo_method: "post" }
             

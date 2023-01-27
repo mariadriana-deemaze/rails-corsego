@@ -1,6 +1,6 @@
 = provide(:title, "Show lesson #{@lesson.title.downcase} from #{@course.title.downcase}")
 
-.breadcrumbs
+.breadcrumbs{:class => "!mb-0"}
   .container
     = link_to 'Courses', courses_path
     \/
@@ -8,48 +8,75 @@
     \/
     = link_to @lesson.title, course_lesson_path(@course, @lesson)
 
-.container
-  .w-full.grid.gap-8{ class: "grid-cols-[700px_1fr]"}
+/ progress
+.flex.flex-row.bg-blue-100.h-1
+  .flex.flex-col.bg-blue-400{:style => "width: #{number_to_percentage(@course.progress(@course.user), { precision: 0 })}" }
+
+.w-full.grid.max-h-screen.overflow-hidden{ class: "grid-cols-[1fr_400px] h-[calc(100vh_-_125px)]"}
+  .flex.flex-col.overflow-y-auto
+    / lesson
     .flex.flex-col
       - if notice.present?
         %p#notice.py-2.px-3.bg-green-50.mb-5.text-green-500.font-medium.rounded-lg.inline-block= notice
       = render @lesson
 
-      .flex.flex-row.gap-4.mt-3
+    / actions
+    .border-b.border-gray-200.dark:border-gray-700
+      %ul.flex.flex-wrap.-mb-px.text-sm.font-medium.text-center{"data-tabs-toggle" => "#actionsTabContent", role: "tablist"}
+        %li.mr-2{role: "presentation"}
+          %button#about-tab.inline-block.p-4.border-b-2.rounded-t-lg{"aria-controls" => "about", "aria-selected" => "false", "data-tabs-target" => "#about", role: "tab", type: "button"} 
+            About
+        %li.mr-2{role: "presentation"}
+          %button#lesson-description-tab.inline-block.p-4.border-b-2.rounded-t-lg{"aria-controls" => "lesson-description", "aria-selected" => "false", "data-tabs-target" => "#lesson-description", role: "tab", type: "button"} 
+            Description
+        %li.mr-2{role: "presentation"}
+          %button#comments-tab.inline-block.p-4.border-b-2.rounded-t-lg{"aria-controls" => "comments", "aria-selected" => "false", "data-tabs-target" => "#comments", role: "tab", type: "button"} 
+            Comments
+        %li.mr-2{role: "presentation"}
+          %button#admin-tab.inline-block.p-4.border-b-2.border-transparent.rounded-t-lg.hover:text-gray-600.hover:border-gray-300.dark:hover:text-gray-300{"aria-controls" => "admin", "aria-selected" => "false", "data-tabs-target" => "#admin", role: "tab", type: "button"} 
+            Actions
+    #actionsTabContent.flex.flex-grow.bg-gray-50.dark:bg-gray-800.p-4
+      #about.w-full.hidden{"aria-labelledby" => "lesson-description-tab", role: "tabpanel"}
+        %h4
+          = @course.title
+        %p.text-md 
+          = @course.short_description
+        %p.mt-4 
+          = @course.description
+      #lesson-description.w-full.hidden{"aria-labelledby" => "lesson-description-tab", role: "tabpanel"}
+        %h4
+          = @lesson.title
+        %p.mt-4 
+          = @lesson.content
+      #comments.w-full.hidden{"aria-labelledby" => "comments-tab", role: "tabpanel"}
+        .pb-3
+          = render 'lessons/comments/form'
+        - if @lesson.comments_count > 0
+          %hr
+          %h4 
+            = "All comments #{@lesson.comments_count}"
+          - @comments.each do |comment|
+            %ul.border-b.border-gray-200.py-4.last:border-0
+              %li
+                = render 'lessons/comments/comment', comment: comment
+      #admin.w-full.hidden{"aria-labelledby" => "admin-tab", role: "tabpanel"}
+        = @lesson.user_lessons.where(user: current_user).first.impressions
         - if policy(@lesson).edit?
           = link_to 'Edit this lesson', edit_course_lesson_path(@course, @lesson), class: "secondary-button"
         - if policy(@lesson).destroy?
           = link_to 'Destroy', [@course, @lesson], data: {turbo_method: :delete}, class: "secondary-button"
-
-    .flex.flex-col.rounded-lg.border.border-gray-200.bg-white.p-5.gap-4
-      .flex.flex-row.p-3.rounded-md.bg-gray-300
-        = "Progress #{number_to_percentage(@course.progress(@course.user), { precision: 0 })}"
-        = @lesson.user_lessons.where(user: current_user).first.impressions
-      %ul.flex.flex-col.gap-4
-        - @lessons.each do | lesson |
-          - if lesson == @lesson
-            %li.border.border-green-500.rounded-md
-              = render "lessons/preview", lesson: lesson
-          - else
-            %li
-              = render "lessons/preview", lesson: lesson
-      - if @lesson.video.attached?
-        - if @lesson.video_thumbnail.attached?
-          %video(controls="true" poster="#{url_for @lesson.video_thumbnail}" width="100%" preload="metadata")
-            %source{src: rails_blob_url(@lesson.video), type:"#{@lesson.video.content_type}"}
-        - else
-          %video(controls="true" width="100%" preload="metadata")
-            %source{src: rails_blob_url(@lesson.video), type:"#{@lesson.video.content_type}"}
-  .flex.flex-col.gap-4
-    New comment:
-    = render 'lessons/comments/form'
-    %hr
-    %h4 All comments
-    = @lesson.comments_count
     
-    - @comments.each do |comment|
-      %ul.border-b.border-gray-200.py-4.last:border-0
+  / lessons
+  .flex.flex-col.border-l.border-gray-200.p-5.gap-4.overflow-y-auto
+    %ul.flex.flex-col.gap-4
+      - @lessons.each do | lesson |
         %li
-          = render 'lessons/comments/comment', comment: comment
-      %p
-    %hr
+          = render "lessons/preview", lesson: lesson, active: lesson == @lesson
+    - if @lesson.video.attached?
+      - if @lesson.video_thumbnail.attached?
+        %video(controls="true" poster="#{url_for @lesson.video_thumbnail}" width="100%" preload="metadata")
+          %source{src: rails_blob_url(@lesson.video), type:"#{@lesson.video.content_type}"}
+      - else
+        %video(controls="true" width="100%" preload="metadata")
+          %source{src: rails_blob_url(@lesson.video), type:"#{@lesson.video.content_type}"}
+

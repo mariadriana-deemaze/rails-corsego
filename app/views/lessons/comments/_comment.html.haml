@@ -1,10 +1,18 @@
-.flex.flex-col
+.relative.flex.flex-col.group
   .flex.flex-row.gap-4.justify-between
-    .flex.flex-row.gap-4
-      = link_to comment.user, user_path(comment.user)
-      #{time_ago_in_words(comment.created_at)}
-      ago
-    - if policy(comment).destroy?  
-      = link_to "Delete", [@course, @lesson, comment], data: {turbo_method: :delete}, class: 'danger-button'
-  .flex.flex-col
-    = comment.content
+    .relative.flex.flex-row.gap-4
+      .relative.flex.w-2-h-2
+        - if @course.user.online?
+          .absolute.w-2.h-2.flex.bg-green-400.top-0.right-0.rounded-full
+        - else
+          .absolute.w-2.h-2.flex.bg-red-700.top-0.right-0.rounded-full
+        = gravatar_for(@course.user.email, size: 50, classes:"w-6 h-6 rounded-full border border-white") 
+      = link_to comment.user, user_path(comment.user), class: "text-sm text-gray-500"
+      %p.text-sm.text-gray-500
+        = "#{time_ago_in_words(comment.created_at)} ago"
+  .flex.flex-col.mt-3
+    %p
+      = comment.content
+
+  - if policy(comment).destroy?  
+    = link_to "Delete", [@course, @lesson, comment], data: {turbo_method: :delete}, class: 'absolute right-0 top-0 danger-button opacity-0 group-hover:opacity-100 transition-opacity duration-700'

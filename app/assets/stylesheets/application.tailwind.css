@@ -10,7 +10,7 @@
 /* UI */
 
 .notice{
-  @apply mb-5 px-4 py-2 border rounded-md
+  @apply mb-5 px-4 py-2 border rounded-md fixed bottom-4 left-2 right-2 animate-fade-down
 }
 
 .notice-success{
@@ -54,11 +54,11 @@
 }
 
 .container {
-  @apply w-full md:w-2/3 mx-auto
+  @apply w-full px-3 md:w-2/3 md:mx-auto md:px-0
 }
 
 .badge-min {
-  @apply mr-2 px-2.5 py-0.5 rounded text-sm font-medium
+  @apply mr-2 px-2.5 py-0.5 rounded text-sm font-medium h-6
 }
 
 .badge-red{
@@ -71,6 +71,10 @@
 
 .badge-blue{
   @apply bg-blue-100 text-blue-800 dark:bg-blue-200 dark:text-blue-900
+}
+
+.badge-orange{
+  @apply bg-orange-100 text-orange-800 dark:bg-orange-200 dark:text-orange-900
 }
 
 .dropdown-item{
@@ -133,8 +137,19 @@ p {
   @apply text-sm font-normal text-gray-700;
 }
 
+/* DEFAULT FORM */
 
-/* FORMS */
+form.simple_form{
+  @apply flex flex-col gap-4
+}
+
+form.simple_form abbr:where([title]){
+  @apply text-red-500
+}
+
+form.simple_form input[type="submit"]{
+  @apply self-start
+}
 
 .form-label {
   @apply block mb-2 text-sm font-medium text-gray-900 dark:text-white

@@ -1,8 +1,10 @@
 module CoursesHelper
     def enrollment_button(course)
         if current_user
-            if course.user == current_user    
-                link_to "Check analytics", course_path(course), class: "link"
+            if current_user.has_role?("admin")
+                link_to "Evaluate", course_path(course), class: "primary-button"
+            elsif course.user == current_user    
+                link_to "Check analytics", statistics_path, class: "link"
             elsif course.enrollments.where(user: current_user).any?
                 link_to course_path(course), class: "link" do
                     "Progress #{number_to_percentage(course.progress(current_user), precision: 0)}"

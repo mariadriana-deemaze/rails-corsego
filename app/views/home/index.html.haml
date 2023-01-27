@@ -5,35 +5,41 @@
         .flex.flex-col.py-40.border-b.border-r-amber-400.items-center.justify-center
             %h2 Continue from where you left of
             = link_to "My courses", purchased_courses_path
-            .relative.grid.grid-cols-3.gap-4.mt-10
+            .relative.grid.md:grid-cols-1.md:grid-cols-3.gap-4.mt-10
                 - @purchased_courses.each do |purchased|
-                    = render 'courses/course', course: purchased
-    .flex.flex-col.py-40.border-b.border-r-amber-400.items-center.justify-center
-        %h2 Latest Courses
-        = link_to "Most recent courses", courses_path(courses_search:{ s: 'created_at desc' })
-        .relative.grid.grid-cols-3.gap-4.mt-10
-            - @latest_courses.each do |latest|
-                = render 'courses/course', course: latest
-    .flex.flex-col.py-40.border-b.border-r-amber-400.items-center.justify-center
-        %h2 Top rated courses
-        = link_to "More popular courses", courses_path(courses_search:{ s: 'average_rating desc' })
-        .relative.grid.grid-cols-3.gap-4.mt-10
-            - @top_rated_courses.each do |top_rated|
-                = render 'courses/course', course: top_rated
-    .flex.flex-col.py-40.border-b.border-r-amber-400.items-center.justify-center
-        %h2 Popular Courses
-        = link_to "More popular courses", courses_path(courses_search:{ s: 'enrollments_count desc' })
-        .relative.grid.grid-cols-3.gap-4.mt-10
-            - @popular_courses.each do |popular|
-                = render 'courses/course', course: popular
-    .flex.flex-col.py-40.border-b.border-r-amber-400.items-center.justify-center
-        %h2 Courses
-        = link_to "More courses", courses_path
-        .relative.grid.grid-cols-3.gap-4.mt-10
-            - @courses.each do |course|
-                = render 'courses/course', course: course
-    .flex.flex-col.py-40.border-b.border-r-amber-400.items-center.justify-center
-        %h2 What the students are saying
-        .relative.grid.grid-cols-3.gap-4.mt-10
-            - @reviews.each do |review|
-                = render 'enrollments/enrollment', enrollment: review
+                    = render 'courses/course-card', course: purchased
+    
+    - if @latest_courses.any?
+        .flex.flex-col.py-40.border-b.border-r-amber-400.items-center.justify-center
+            %h2 Latest Courses
+            = link_to "Most recent courses", courses_path(courses_search:{ s: 'created_at desc' }), {:class => "link"}
+            .relative.grid.md:grid-cols-1.md:grid-cols-3.gap-4.mt-10
+                - @latest_courses.each do |latest|
+                    = render 'courses/course-card', course: latest
+    - if @top_rated_courses.any?
+        .flex.flex-col.py-40.border-b.border-r-amber-400.items-center.justify-center
+            %h2 Top rated courses
+            = link_to "More popular courses", courses_path(courses_search:{ s: 'average_rating desc' }), {:class => "link"}
+            .relative.grid.md:grid-cols-1.md:grid-cols-3.gap-4.mt-10
+                - @top_rated_courses.each do |top_rated|
+                    = render 'courses/course-card', course: top_rated
+    - if @popular_courses.any?
+        .flex.flex-col.py-40.border-b.border-r-amber-400.items-center.justify-center
+            %h2 Popular Courses
+            = link_to "More popular courses", courses_path(courses_search:{ s: 'enrollments_count desc' }), {:class => "link"}
+            .relative.grid.md:grid-cols-1.md:grid-cols-3.gap-4.mt-10
+                - @popular_courses.each do |popular|
+                    = render 'courses/course-card', course: popular
+    - if @courses.any?
+        .flex.flex-col.py-40.border-b.border-r-amber-400.items-center.justify-center
+            %h2 Courses
+            = link_to "More courses", courses_path, {:class => "link"}
+            .relative.grid.md:grid-cols-1.md:grid-cols-3.gap-4.mt-10
+                - @courses.each do |course|
+                    = render 'courses/course-card', course: course
+    - if @reviews.any?
+        .flex.flex-col.py-40.border-b.border-r-amber-400.items-center.justify-center
+            %h2 What the students are saying
+            .relative.grid.md:grid-cols-1.md:grid-cols-3.gap-4.mt-10
+                - @reviews.each do |review|
+                    = render 'enrollments/enrollment', enrollment: review

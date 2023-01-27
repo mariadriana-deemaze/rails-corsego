@@ -26,9 +26,6 @@
           = sort_link(@ransack_courses, :average_rating, "Popularity")
           = sort_link(@ransack_courses, :created_at)
           = sort_link(@ransack_courses, :enrollments_count)
-          /.flex.flex-col  
-          /  = f.label :price, class:"form-label"
-          /  = f.search_field :price_eq, type: "number", placeholder: "Search by price", class:"form-input"
           .flex.flex-row.gap-2
             = f.submit class:"primary-button w-full"
             = link_to unapproved_courses_path, class:"secondary-button" do
@@ -38,10 +35,11 @@
       .overflow-x-auto.flex.flex-col
         .relative.grid.grid-cols-3.gap-4.min-w-full
           - @courses.each do |course|
-            = render 'courses/course', course: course
+            = render 'courses/course-card', course: course
 
-        %div.my-5{:class => "mb-[35px]"}
-          != pagy_nav(@pagy)
+        - if @pagy.pages > 1
+          %div.my-5{:class => "mb-[35px]"}
+            != pagy_nav(@pagy)
     - else
       .flex.flex-col 
         No results match the query

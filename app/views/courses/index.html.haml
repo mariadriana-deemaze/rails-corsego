@@ -38,8 +38,9 @@
       .overflow-x-auto.flex.flex-col
         .relative.grid.grid-cols-3.gap-4.min-w-full
           - @courses.each do |course|
-            = render 'courses/course', course: course
+            = render 'courses/course-card', course: course
 
+      - if @pagy.pages > 1
         %div.my-5{:class => "mb-[35px]"}
           != pagy_nav(@pagy)
     - else

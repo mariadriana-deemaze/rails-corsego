@@ -13,6 +13,13 @@ class CoursesController < ApplicationController
 
   def show
     @lessons = @course.lessons.rank(:row_order)
+
+    if current_user
+      @is_enrolled = @course.enrollments.where(user: current_user).present?
+    else
+      @is_enrolled = false
+    end
+    
     @enrollments_with_review = @course.enrollments.reviewed
   end
 

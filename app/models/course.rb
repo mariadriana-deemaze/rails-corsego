@@ -30,9 +30,6 @@ class Course < ApplicationRecord
     scope :unpublished, -> { where(published: false) }
     scope :unapproved,  -> { where(approved: false) }
 
-    LANGUAGES = [:"English", :"Portuguese"]
-    LEVELS = [:"Beginner", :"Intermediate", :"Advanced"]
-    
     # gem `friendly_id`: adds course slug by title
     extend FriendlyId
     friendly_id :title, use: :slugged
@@ -47,17 +44,18 @@ class Course < ApplicationRecord
 
     # gem `stripe`: create stripe product after save if it approved and published
     after_save :create_update_stripe_product
+    after_destroy :archive_stripe_product
     
     def to_s
         title
     end
 
     def self.languages 
-        LANGUAGES.map{ |language| [language, language] }
+        [:"English", :"Portuguese"].map{ |language| [language, language] }
     end
 
     def self.levels 
-        LEVELS.map{ |level| [level, level] }
+        [:"Beginner", :"Intermediate", :"Advanced"].map{ |level| [level, level] }
     end
 
     def bought(user)
@@ -103,6 +101,12 @@ class Course < ApplicationRecord
                 stripe_price   = Stripe::Price.create(product: stripe_product, unit_amount: price_as_cents(self.price), currency: self.currency)
                 update(stripe_product_id: stripe_product.id, stripe_price_id: stripe_price.id)
             end
+        end
+    end
+
+    def archive_stripe_product
+        if self.stripe_product_id.present?
+            Stripe::Product.update(self.stripe_product_id, { active: false })
         end
     end
 
