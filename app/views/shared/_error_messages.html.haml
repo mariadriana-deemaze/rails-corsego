@@ -1,7 +1,7 @@
-- if !object.errors.nil? && object.errors.any?
+- if object.errors.any?
     .notice.notice-danger
         %p.text-red-500
-            %b  
+            %b 
                 = pluralize(object.errors.count, "error") 
         %ul
             - object.errors.full_messages.each do |msg|

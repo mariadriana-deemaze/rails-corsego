@@ -1,4 +1,4 @@
-.container
+.container.flex.flex-col.gap-6.mt-10
   %h2 Change your password
   = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
     = render "shared/error_messages", object: f.object
