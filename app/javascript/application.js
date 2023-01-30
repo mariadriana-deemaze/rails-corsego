@@ -6,13 +6,4 @@ import '@rails/actiontext';
 import 'flowbite';
 import "chartkick";
 import "Chart.bundle";
-import 'jquery';
 import 'tom-select';
-
-$(function(){
- 
-  console.log("Hey!");
-
-
-
-});  

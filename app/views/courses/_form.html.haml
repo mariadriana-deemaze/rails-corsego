@@ -6,7 +6,7 @@
   = f.input :title
   = f.input :description, as: :rich_text_area
   = f.input :short_description
-  = f.select :tag_ids, Tag.all.pluck(:name, :id), data: { controller: 'ts--select' }
+  = f.select :tag_ids, Tag.all.pluck(:name, :id), {include_blank: true, multiple: true }, data: { controller: 'ts--select' }
   = f.input :language, collection: ["English", "Portuguese"]
   = f.input :level, collection: ["Beginner", "Intermediate", "Advanced"]
   = f.input :price

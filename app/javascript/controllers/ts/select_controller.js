@@ -1,10 +1,9 @@
 import { Controller } from "@hotwired/stimulus"
 
-import {TomSelect} from "tom-select"
-
-// Connects to data-controller="ts--select"
+//import * as TomSelect from "tom-select"
 export default class extends Controller {
   connect() {
-    new TomSelect(this.element)
+    console.log("Hello, Stimulus!", this.element)
+    // new TomSelect(this.element)
   }
 }
