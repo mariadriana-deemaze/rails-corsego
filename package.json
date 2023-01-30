@@ -5,18 +5,14 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "css:recompile": "rails assets:clobber && rails assets:precompile",
+    "assets": "rails assets:clobber && rails assets:precompile",
     "format": "npx prettier --write .",
     "erb2haml": "rails haml:erb2haml"
   },
   "dependencies": {
     "@tailwindcss/line-clamp": "^0.4.2",
-    "chart.js": "^4.2.0",
-    "chartkick": "^5.0.1",
-    "flowbite": "^1.6.0",
-    "jquery": "^3.6.3",
-    "selectize": "^0.12.6",
-    "sifter": "^0.5.4"
+    "flowbite": "^1.6.3",
+    "jquery": "^3.6.3"
   },
   "devDependencies": {
     "prettier": "^2.8.2",

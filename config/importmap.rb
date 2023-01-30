@@ -11,8 +11,4 @@ pin "@rails/actiontext", to: "actiontext.js"
 pin "chartkick", to: "chartkick.js"
 pin "Chart.bundle", to: "Chart.bundle.js"
 pin "jquery", to: "https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.js"
-pin "sifter", to: "https://cdn.jsdelivr.net/npm/sifter@0.5.4/sifter.js"
-pin "selectize", to: "https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/js/selectize.min.js"
-
-
-
+pin "tom-select", to: "https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.js"

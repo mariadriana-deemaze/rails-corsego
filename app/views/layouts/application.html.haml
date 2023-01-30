@@ -8,6 +8,7 @@
     = csrf_meta_tags
     = csp_meta_tag
     %script{src: "https://js.stripe.com/v3/"}
+    %link{:crossorigin => "", :href => "https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.css", :rel => "stylesheet"}/
     = stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload"
     = stylesheet_link_tag "application", "data-turbo-track": "reload"
     = javascript_importmap_tags
