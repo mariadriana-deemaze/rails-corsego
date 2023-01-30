@@ -25,7 +25,7 @@ class Lesson < ApplicationRecord
 
   # gem `public_activity`: track lessons activities 
   include PublicActivity::Model
-  tracked owner: Proc.new{ |controller, model|  PublicActivity.set_controller(@controller) && controller.current_user }
+  tracked owner: Proc.new{ |controller, model| controller.current_user }
 
   # gem `ranked-model`: order lessons
   include RankedModel

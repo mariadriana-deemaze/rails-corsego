@@ -15,6 +15,10 @@ class User < ApplicationRecord
   extend FriendlyId
   friendly_id :email, use: :slugged
 
+  # gem `public_activity`: track user activities 
+  include PublicActivity::Model
+  tracked only: [:create, :destroy], owner: :itself
+
   # gem `rolify`: associate with user roles
   rolify
 
