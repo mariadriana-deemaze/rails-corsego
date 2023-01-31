@@ -7,3 +7,4 @@ import 'flowbite';
 import "chartkick";
 import "Chart.bundle";
 import 'tom-select';
+import '@rails/ujs';

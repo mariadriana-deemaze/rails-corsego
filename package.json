@@ -10,6 +10,7 @@
     "erb2haml": "rails haml:erb2haml"
   },
   "dependencies": {
+    "@rails/request.js": "^0.0.8",
     "@tailwindcss/line-clamp": "^0.4.2",
     "flowbite": "^1.6.3",
     "tom-select": "^2.2.2"
